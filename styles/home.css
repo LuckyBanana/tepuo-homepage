@@ -1,0 +1,575 @@
+/**
+ * Te Puo Website - Homepage Styles
+ * 
+ * Styles specific to the homepage (index.html) featuring:
+ * - Hero section with spherical design elements
+ * - Text sections with earth tones
+ * - Responsive layout for mobile/tablet/desktop
+ * - Smooth scroll behavior
+ * 
+ * Requirements: 7.1, 7.2, 7.3, 8.2
+ */
+
+/* ============================================
+   HEADER AND NAVIGATION
+   ============================================ */
+
+header {
+  background-color: var(--color-bg-primary);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+  transition: box-shadow var(--transition-base);
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-sm) var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.logo {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: var(--spacing-md);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: var(--color-text-medium);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-small);
+  transition: all var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+  background-color: var(--color-bg-secondary);
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: var(--color-accent);
+  background-color: var(--color-bg-secondary);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero {
+  background: linear-gradient(135deg, var(--color-sand) 0%, var(--color-bg-secondary) 100%);
+  padding: var(--spacing-xl) var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative spherical elements in background */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--color-earth-light) 0%, transparent 70%);
+  border-radius: var(--border-radius-sphere);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--color-clay) 0%, transparent 70%);
+  border-radius: var(--border-radius-sphere);
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: var(--font-size-3xl);
+  color: var(--color-earth-dark);
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-tight);
+}
+
+.hero-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-medium);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+}
+
+.hero-image {
+  z-index: 1;
+  max-width: 500px;
+  width: 100%;
+}
+
+.sphere-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-sphere);
+  box-shadow: var(--shadow-xl);
+  transition: transform var(--transition-slow);
+}
+
+.sphere-image:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   SECTION CONTAINERS
+   ============================================ */
+
+.section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.section-title {
+  text-align: center;
+  color: var(--color-earth-dark);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+}
+
+/* Decorative underline with spherical accent */
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-accent);
+  border-radius: var(--border-radius-soft);
+}
+
+/* ============================================
+   BRAND STORY SECTION
+   ============================================ */
+
+.brand-story {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg-primary);
+}
+
+.story-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.story-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-medium);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-md);
+  text-align: justify;
+}
+
+.story-text:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   DORODANGO TECHNIQUE SECTION
+   ============================================ */
+
+.dorodango-technique {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg-secondary);
+}
+
+.technique-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.technique-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.technique-text p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-medium);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-md);
+  text-align: justify;
+}
+
+.technique-text p:last-child {
+  margin-bottom: 0;
+}
+
+.technique-image {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.process-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-soft);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   PHILOSOPHY SECTION
+   ============================================ */
+
+.philosophy {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg-primary);
+}
+
+.philosophy-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.philosophy-card {
+  background-color: var(--color-bg-secondary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-soft);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Spherical decorative element in card */
+.philosophy-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+  border-radius: var(--border-radius-sphere);
+  opacity: 0.1;
+  transition: opacity var(--transition-base);
+}
+
+.philosophy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.philosophy-card:hover::before {
+  opacity: 0.2;
+}
+
+.card-title {
+  color: var(--color-accent);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-text {
+  color: var(--color-text-medium);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.commercial-brief {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  background-color: var(--color-sand);
+  border-radius: var(--border-radius-soft);
+  border-left: 4px solid var(--color-accent);
+}
+
+.brief-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-medium);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-sm);
+  text-align: justify;
+}
+
+.brief-text:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+  background-color: var(--color-earth-dark);
+  color: var(--color-text-light);
+  padding: var(--spacing-lg) 0 var(--spacing-md);
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+.footer-section {
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-title {
+  color: var(--color-sand);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-text {
+  color: var(--color-earth-light);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.footer-links,
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li,
+.social-links li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.footer-link,
+.social-link {
+  color: var(--color-earth-light);
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover,
+.social-link:hover {
+  color: var(--color-sand);
+  text-decoration: none;
+}
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: var(--spacing-md) auto 0;
+  padding: var(--spacing-md) var(--spacing-md) 0;
+  border-top: 1px solid var(--color-earth-medium);
+  text-align: center;
+}
+
+.copyright {
+  color: var(--color-earth-light);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET
+   ============================================ */
+
+@media (min-width: 768px) {
+  /* Header */
+  .header-container {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .logo {
+    font-size: var(--font-size-3xl);
+  }
+
+  .nav-list {
+    gap: var(--spacing-lg);
+  }
+
+  /* Hero */
+  .hero {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--spacing-xxl) var(--spacing-lg);
+  }
+
+  .hero-content {
+    text-align: left;
+    max-width: 50%;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-4xl);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-xl);
+  }
+
+  .hero-image {
+    max-width: 45%;
+  }
+
+  /* Technique Section */
+  .technique-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  /* Philosophy Cards */
+  .philosophy-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Footer */
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - DESKTOP
+   ============================================ */
+
+@media (min-width: 1024px) {
+  /* Hero */
+  .hero {
+    padding: var(--spacing-xxl) var(--spacing-xl);
+  }
+
+  .hero::before {
+    width: 400px;
+    height: 400px;
+  }
+
+  .hero::after {
+    width: 500px;
+    height: 500px;
+  }
+
+  /* Section Containers */
+  .section-container {
+    padding: 0 var(--spacing-lg);
+  }
+
+  /* Philosophy Cards */
+  .philosophy-content {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  /* Footer */
+  .footer-container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - LARGE DESKTOP
+   ============================================ */
+
+@media (min-width: 1280px) {
+  /* Hero */
+  .hero-title {
+    font-size: 4.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+/* ============================================
+   SMOOTH SCROLL BEHAVIOR
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Smooth scroll for anchor links */
+a[href^="#"] {
+  scroll-behavior: smooth;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  header {
+    position: static;
+  }
+
+  .hero::before,
+  .hero::after,
+  .philosophy-card::before {
+    display: none;
+  }
+
+  footer {
+    page-break-before: always;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================ */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .hero {
+    background: var(--color-bg-primary);
+  }
+
+  .philosophy-card {
+    border: 2px solid var(--color-text-dark);
+  }
+}
+
+/* Dark mode support (optional future enhancement) */
+@media (prefers-color-scheme: dark) {
+  /* Dark mode styles can be added here if needed */
+}

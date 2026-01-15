@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Trouvez les boutiques qui vendent les bijoux artisanaux Te Puo. Carte interactive des points de vente en France.">
+  <meta name="keywords" content="points de vente, boutiques, bijoux artisanaux, Te Puo, carte interactive">
+  <meta name="author" content="Te Puo">
+  <title>Points de Vente - Te Puo</title>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="anonymous" />
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/points-vente.css">
+</head>
+<body>
+  <!-- Header with Navigation -->
+  <header>
+    <div class="header-container">
+      <h1 class="logo">Te Puo</h1>
+      <nav aria-label="Navigation principale">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Accueil</a></li>
+          <li><a href="bijoux.html" class="nav-link">Nos Bijoux</a></li>
+          <li><a href="points-vente.html" class="nav-link active" aria-current="page">Points de Vente</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="page-header">
+      <h1 class="page-title">Où Trouver Nos Bijoux</h1>
+      <p class="page-subtitle">Découvrez les boutiques qui proposent nos créations artisanales</p>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="loading-state" role="status" aria-live="polite">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Chargement de la carte...</p>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" role="alert" aria-live="assertive" style="display: none;">
+      <div class="error-message">
+        <p class="error-text"></p>
+        <button class="retry-button" onclick="location.reload()">Réessayer</button>
+      </div>
+    </div>
+
+    <!-- Map Container -->
+    <div id="map-container" class="map-container">
+      <div id="map" class="map"></div>
+    </div>
+
+    <!-- Sales Points List (Optional) -->
+    <div id="sales-points-list" class="sales-points-list">
+      <h2 class="list-title">Nos Points de Vente</h2>
+      <div id="sales-points-items" class="sales-points-items">
+        <!-- Sales points will be dynamically inserted here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 class="footer-title">Te Puo</h3>
+        <p class="footer-text">Bijoux artisanaux inspirés de la technique dorodango</p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="index.html" class="footer-link">Accueil</a></li>
+          <li><a href="bijoux.html" class="footer-link">Nos Bijoux</a></li>
+          <li><a href="points-vente.html" class="footer-link">Points de Vente</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Contact</h3>
+        <p class="footer-text">
+          <a href="mailto:contact@tepuo.com" class="footer-link">contact@tepuo.com</a>
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Suivez-nous</h3>
+        <ul class="social-links">
+          <li><a href="#" class="social-link" aria-label="Instagram">Instagram</a></li>
+          <li><a href="#" class="social-link" aria-label="Facebook">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2024 Te Puo. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin="anonymous"></script>
+  
+  <!-- Scripts -->
+  <script type="module" src="scripts/points-vente.js"></script>
+</body>
+</html>

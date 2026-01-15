@@ -1,0 +1,506 @@
+/**
+ * Points de Vente Page Styles
+ * 
+ * Styles for the interactive map page displaying sales points.
+ * Includes map container, marker popups, loading states, and sales points list.
+ * 
+ * Requirements: 7.1, 7.2
+ */
+
+/* ============================================
+   HEADER AND NAVIGATION
+   ============================================ */
+
+header {
+  background-color: var(--color-bg-primary);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-sm) var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-earth-dark);
+  margin: 0;
+}
+
+.nav-list {
+  display: flex;
+  gap: var(--spacing-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: var(--color-text-medium);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-small);
+  transition: all var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+  background-color: var(--color-bg-secondary);
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: var(--color-accent);
+  background-color: var(--color-bg-secondary);
+}
+
+/* ============================================
+   PAGE HEADER
+   ============================================ */
+
+.page-header {
+  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg-secondary),
+    var(--color-bg-primary)
+  );
+}
+
+.page-title {
+  font-size: var(--font-size-3xl);
+  color: var(--color-earth-dark);
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  gap: var(--spacing-md);
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid var(--color-sand);
+  border-top-color: var(--color-accent);
+  border-radius: var(--border-radius-sphere);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ============================================
+   ERROR CONTAINER
+   ============================================ */
+
+.error-container {
+  max-width: 600px;
+  margin: var(--spacing-xl) auto;
+  padding: 0 var(--spacing-md);
+}
+
+.error-message {
+  background-color: #FEE;
+  color: #C33;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-soft);
+  border-left: 4px solid #C33;
+  text-align: center;
+}
+
+.error-text {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.retry-button {
+  background-color: var(--color-accent);
+  color: var(--color-text-light);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-soft);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.retry-button:hover {
+  background-color: var(--color-accent-dark);
+}
+
+.retry-button:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   MAP CONTAINER
+   ============================================ */
+
+.map-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto var(--spacing-lg);
+  padding: 0 var(--spacing-md);
+}
+
+.map {
+  width: 100%;
+  height: 500px;
+  border-radius: var(--border-radius-soft);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+/* Responsive map height */
+@media (min-width: 768px) {
+  .map {
+    height: 600px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .map {
+    height: 700px;
+  }
+}
+
+/* ============================================
+   CUSTOM MARKER POPUP STYLES
+   ============================================ */
+
+/* Override Leaflet's default popup styles with brand colors */
+.leaflet-popup-content-wrapper {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  min-width: 200px;
+}
+
+.marker-popup {
+  padding: var(--spacing-md);
+}
+
+.popup-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-earth-dark);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.popup-address {
+  font-size: var(--font-size-base);
+  color: var(--color-text-medium);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Style the popup tip (arrow) */
+.leaflet-popup-tip {
+  background-color: var(--color-bg-primary);
+}
+
+/* Style the close button */
+.leaflet-popup-close-button {
+  color: var(--color-text-muted) !important;
+  font-size: 24px !important;
+  padding: 4px 8px !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: var(--color-accent) !important;
+}
+
+/* ============================================
+   SALES POINTS LIST
+   ============================================ */
+
+.sales-points-list {
+  max-width: 1280px;
+  margin: 0 auto var(--spacing-xl);
+  padding: 0 var(--spacing-md);
+}
+
+.list-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-earth-dark);
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.sales-points-items {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+/* Responsive grid */
+@media (min-width: 768px) {
+  .sales-points-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sales-points-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Sales Point Item Card */
+.sales-point-item {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-soft);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-md);
+  transition: all var(--transition-base);
+}
+
+.sales-point-item:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.sales-point-name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-earth-dark);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.sales-point-address {
+  font-size: var(--font-size-base);
+  color: var(--color-text-medium);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.locate-button {
+  background-color: var(--color-accent-light);
+  color: var(--color-text-dark);
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-soft);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+
+.locate-button:hover {
+  background-color: var(--color-accent);
+  color: var(--color-text-light);
+}
+
+.locate-button:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-xl);
+  grid-column: 1 / -1;
+}
+
+.empty-state-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+  background-color: var(--color-earth-dark);
+  color: var(--color-text-light);
+  padding: var(--spacing-lg) 0 var(--spacing-md);
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.footer-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-sand);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.footer-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-earth-light);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.footer-link {
+  color: var(--color-earth-light);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover {
+  color: var(--color-sand);
+  text-decoration: underline;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.social-link {
+  color: var(--color-earth-light);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast);
+}
+
+.social-link:hover {
+  color: var(--color-sand);
+}
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: var(--spacing-lg) auto 0;
+  padding: var(--spacing-md) var(--spacing-md) 0;
+  border-top: 1px solid var(--color-earth-medium);
+  text-align: center;
+}
+
+.copyright {
+  font-size: var(--font-size-sm);
+  color: var(--color-earth-light);
+  margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .header-container {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    text-align: center;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    width: 100%;
+  }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+  }
+
+  .page-header {
+    padding: var(--spacing-md);
+  }
+
+  .page-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .page-subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  .map {
+    height: 400px;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .map {
+    height: 550px;
+  }
+}

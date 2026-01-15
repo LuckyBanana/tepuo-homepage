@@ -1,0 +1,33 @@
+{
+  "name": "te-puo-website",
+  "version": "1.0.0",
+  "description": "Site web vitrine pour Te Puo - bijoux artisanaux inspirés de la technique dorodango japonaise",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
+  },
+  "keywords": [
+    "jewelry",
+    "dorodango",
+    "artisanal",
+    "te-puo"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0",
+    "fast-check": "^3.15.0",
+    "jsdom": "^23.0.0",
+    "@vitest/ui": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4"
+  }
+}

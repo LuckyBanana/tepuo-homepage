@@ -1,0 +1,637 @@
+/**
+ * Te Puo Website - Bijoux Page Styles
+ * 
+ * This file contains styles specific to the jewelry page (bijoux.html),
+ * including collection sections, jewelry cards, loading states, and error messages.
+ * The design incorporates spherical accents inspired by the dorodango technique.
+ * 
+ * Requirements: 4.5, 7.1, 7.2
+ */
+
+/* ============================================
+   HEADER AND NAVIGATION
+   ============================================ */
+
+header {
+  background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-sand);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-sticky);
+  box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.logo {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-earth-dark);
+  margin: 0;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-md);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: var(--color-text-medium);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-small);
+  transition: all var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+  background-color: var(--color-sand);
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: var(--color-accent);
+  background-color: var(--color-sand);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+main {
+  min-height: calc(100vh - 200px);
+  padding: var(--spacing-lg) var(--spacing-md);
+  background-color: var(--color-bg-secondary);
+}
+
+/* ============================================
+   PAGE HEADER
+   ============================================ */
+
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-md) 0;
+}
+
+.page-title {
+  font-size: var(--font-size-4xl);
+  color: var(--color-earth-dark);
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+  display: inline-block;
+}
+
+/* Spherical accent decoration under title */
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 8px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--color-accent) 20%, 
+    var(--color-accent) 80%, 
+    transparent 100%
+  );
+  border-radius: var(--border-radius-soft);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: var(--spacing-md) auto 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  min-height: 400px;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid var(--color-sand);
+  border-top-color: var(--color-accent);
+  border-radius: var(--border-radius-sphere);
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacing-md);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   ERROR CONTAINER
+   ============================================ */
+
+.error-container {
+  max-width: 600px;
+  margin: var(--spacing-xl) auto;
+  padding: var(--spacing-md);
+}
+
+.error-message {
+  background-color: #FEF2F2;
+  border: 2px solid #FCA5A5;
+  border-left: 6px solid #DC2626;
+  border-radius: var(--border-radius-medium);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-md);
+}
+
+.error-text {
+  color: #991B1B;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-relaxed);
+}
+
+.retry-button {
+  background-color: var(--color-accent);
+  color: var(--color-text-light);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-soft);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.retry-button:hover {
+  background-color: var(--color-accent-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.retry-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================
+   COLLECTIONS CONTAINER
+   ============================================ */
+
+.collections-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-soft);
+  box-shadow: var(--shadow-md);
+  max-width: 600px;
+  margin: var(--spacing-xl) auto;
+}
+
+.empty-state-text {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-medium);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.empty-state-subtext {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ============================================
+   COLLECTION SECTION
+   ============================================ */
+
+.collection-section {
+  margin-bottom: var(--spacing-xl);
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-soft);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-base);
+}
+
+.collection-section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.collection-section:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   COLLECTION HEADER
+   ============================================ */
+
+.collection-header {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--color-sand);
+  position: relative;
+}
+
+/* Spherical accent decoration */
+.collection-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  border-radius: var(--border-radius-sphere);
+  box-shadow: var(--shadow-sm);
+}
+
+.collection-title {
+  font-size: var(--font-size-3xl);
+  color: var(--color-earth-dark);
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.collection-description {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  max-width: 800px;
+  margin: 0;
+}
+
+/* ============================================
+   JEWELRY GRID
+   ============================================ */
+
+.jewelry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+/* Responsive grid adjustments */
+@media (min-width: 640px) {
+  .jewelry-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .jewelry-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+/* ============================================
+   JEWELRY CARD
+   ============================================ */
+
+.jewelry-card {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-soft);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.jewelry-card:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
+}
+
+/* ============================================
+   JEWELRY IMAGE CONTAINER
+   ============================================ */
+
+.jewelry-image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  background-color: var(--color-sand);
+  overflow: hidden;
+}
+
+/* Spherical overlay effect on hover */
+.jewelry-image-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(139, 111, 71, 0.2) 0%, transparent 70%);
+  border-radius: var(--border-radius-sphere);
+  transform: translate(-50%, -50%);
+  transition: all var(--transition-slow);
+  pointer-events: none;
+}
+
+.jewelry-card:hover .jewelry-image-container::after {
+  width: 200%;
+  height: 200%;
+}
+
+.jewelry-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+/* Lazy loading state - subtle blur effect */
+.jewelry-image[loading="lazy"] {
+  background-color: var(--color-sand);
+}
+
+.jewelry-card:hover .jewelry-image {
+  transform: scale(1.05);
+}
+
+/* Image error state styling */
+.jewelry-image[src*="data:image/svg"] {
+  object-fit: contain;
+  padding: var(--spacing-md);
+}
+
+/* ============================================
+   JEWELRY CONTENT
+   ============================================ */
+
+.jewelry-content {
+  padding: var(--spacing-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.jewelry-name {
+  font-size: var(--font-size-xl);
+  color: var(--color-earth-dark);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-xs);
+  line-height: var(--line-height-tight);
+}
+
+.jewelry-description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+  background-color: var(--color-earth-dark);
+  color: var(--color-text-light);
+  padding: var(--spacing-lg) var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.footer-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-sand);
+  margin-bottom: var(--spacing-xs);
+}
+
+.footer-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-earth-light);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.footer-links,
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.footer-link,
+.social-link {
+  color: var(--color-earth-light);
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover,
+.social-link:hover {
+  color: var(--color-sand);
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-earth-medium);
+  text-align: center;
+}
+
+.copyright {
+  font-size: var(--font-size-sm);
+  color: var(--color-earth-light);
+  margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Small devices (landscape phones, 640px and up) */
+@media (min-width: 640px) {
+  .page-title {
+    font-size: 3.5rem;
+  }
+  
+  .collection-title {
+    font-size: 2.75rem;
+  }
+  
+  .header-container {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  
+  main {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .nav-list {
+    gap: var(--spacing-lg);
+  }
+  
+  .page-header {
+    margin-bottom: var(--spacing-xxl);
+  }
+  
+  .collection-section {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* Large devices (desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  .page-title {
+    font-size: 4rem;
+  }
+  
+  .collection-title {
+    font-size: 3rem;
+  }
+  
+  .jewelry-content {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================ */
+
+/* Focus styles for keyboard navigation */
+.nav-link:focus-visible,
+.retry-button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.jewelry-card:focus-within {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .jewelry-card {
+    border: 2px solid var(--color-earth-dark);
+  }
+  
+  .collection-header {
+    border-bottom-width: 3px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .jewelry-card,
+  .jewelry-image,
+  .loading-spinner,
+  .retry-button,
+  .jewelry-image-container::after {
+    animation: none;
+    transition: none;
+  }
+  
+  .jewelry-card:hover {
+    transform: none;
+  }
+  
+  .jewelry-card:hover .jewelry-image {
+    transform: none;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  header,
+  footer,
+  .loading-state,
+  .error-container,
+  .retry-button {
+    display: none;
+  }
+  
+  .jewelry-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid var(--color-earth-medium);
+  }
+  
+  .collection-section {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid var(--color-earth-medium);
+    margin-bottom: var(--spacing-md);
+  }
+}

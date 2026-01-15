@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Découvrez nos collections de bijoux artisanaux Te Puo, créés avec la technique dorodango japonaise. Pièces uniques en terre polie.">
+  <meta name="keywords" content="bijoux artisanaux, collections, dorodango, bijoux faits main, terre polie">
+  <meta name="author" content="Te Puo">
+  <title>Nos Bijoux - Te Puo</title>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/bijoux.css">
+</head>
+<body>
+  <!-- Header with Navigation -->
+  <header>
+    <div class="header-container">
+      <h1 class="logo">Te Puo</h1>
+      <nav aria-label="Navigation principale">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Accueil</a></li>
+          <li><a href="bijoux.html" class="nav-link active" aria-current="page">Nos Bijoux</a></li>
+          <li><a href="points-vente.html" class="nav-link">Points de Vente</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="page-header">
+      <h1 class="page-title">Nos Collections</h1>
+      <p class="page-subtitle">Découvrez nos bijoux artisanaux, chaque pièce unique façonnée avec la technique dorodango</p>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="loading-state" role="status" aria-live="polite">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Chargement des collections...</p>
+    </div>
+
+    <!-- Error Message Container -->
+    <div id="error-container" class="error-container" role="alert" aria-live="assertive" style="display: none;">
+      <div class="error-message">
+        <p class="error-text"></p>
+        <button class="retry-button" onclick="location.reload()">Réessayer</button>
+      </div>
+    </div>
+
+    <!-- Collections Container (populated dynamically) -->
+    <div id="collections-container" class="collections-container">
+      <!-- Collections will be dynamically inserted here by bijoux.js -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 class="footer-title">Te Puo</h3>
+        <p class="footer-text">Bijoux artisanaux inspirés de la technique dorodango</p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="index.html" class="footer-link">Accueil</a></li>
+          <li><a href="bijoux.html" class="footer-link">Nos Bijoux</a></li>
+          <li><a href="points-vente.html" class="footer-link">Points de Vente</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Contact</h3>
+        <p class="footer-text">
+          <a href="mailto:contact@tepuo.com" class="footer-link">contact@tepuo.com</a>
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Suivez-nous</h3>
+        <ul class="social-links">
+          <li><a href="#" class="social-link" aria-label="Instagram">Instagram</a></li>
+          <li><a href="#" class="social-link" aria-label="Facebook">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2024 Te Puo. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="scripts/bijoux.js"></script>
+</body>
+</html>
