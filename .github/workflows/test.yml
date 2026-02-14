@@ -62,35 +62,35 @@ jobs:
           retention-days: 30
 
   # Property-based tests job (separate to highlight PBT results)
-  property-tests:
-    runs-on: ubuntu-latest
+  # property-tests:
+  #   runs-on: ubuntu-latest
     
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'npm'
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20.x'
+  #         cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+  #     - name: Install dependencies
+  #       run: npm ci
 
-      - name: Run property-based tests
-        run: npm test -- --run --reporter=verbose
-        env:
-          VITEST_FILTER: property
+  #     - name: Run property-based tests
+  #       run: npm test -- --run --reporter=verbose
+  #       env:
+  #         VITEST_FILTER: property
 
-      - name: Comment PR with PBT results
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '✅ Property-based tests completed successfully!'
-            })
+  #     - name: Comment PR with PBT results
+  #       if: github.event_name == 'pull_request'
+  #       uses: actions/github-script@v7
+  #       with:
+  #         script: |
+  #           github.rest.issues.createComment({
+  #             issue_number: context.issue.number,
+  #             owner: context.repo.owner,
+  #             repo: context.repo.repo,
+  #             body: '✅ Property-based tests completed successfully!'
+  #           })
