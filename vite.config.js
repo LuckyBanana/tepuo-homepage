@@ -16,13 +16,12 @@ export default defineConfig({
         pointsVente: './points-vente.html'
       }
     },
-    // Minify for production
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true
-      }
-    }
+    // Minify for production using esbuild (standard in Vite)
+    minify: 'esbuild',
+  },
+  esbuild: {
+    // Remove console and debugger in production
+    drop: ['console', 'debugger'],
   },
   server: {
     port: 3000,
