@@ -513,8 +513,92 @@ footer {
    RESPONSIVE DESIGN
    ============================================ */
 
+@media (max-width: 767px) {
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1001;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .hamburger {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text-dark);
+    transition: background 0.2s ease-in-out;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-text-dark);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    bottom: -8px;
+  }
+
+  .nav-toggle--open .hamburger {
+    background: transparent;
+  }
+
+  .nav-toggle--open .hamburger::before {
+    transform: rotate(45deg) translate(5px, 6px);
+  }
+
+  .nav-toggle--open .hamburger::after {
+    transform: rotate(-45deg) translate(5px, -6px);
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100%;
+    background: var(--color-bg-secondary);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    padding-top: 5rem;
+  }
+
+  .nav--visible {
+    transform: translateX(0);
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .nav-link {
+    font-size: var(--font-size-lg);
+  }
+}
+
 /* Small devices (landscape phones, 640px and up) */
 @media (min-width: 640px) {
+  .nav-toggle {
+    display: none;
+  }
+
   .page-title {
     font-size: 3.5rem;
   }

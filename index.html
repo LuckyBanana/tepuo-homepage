@@ -8,16 +8,25 @@
   <meta name="author" content="Te Puo">
   <title>Te Puo - Bijoux Artisanaux Dorodango</title>
   
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  
   <!-- Styles -->
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/home.css">
 </head>
 <body>
+  <div id="tsparticles"></div>
   <!-- Header with Navigation -->
   <header>
     <div class="header-container">
       <h1 class="logo">Te Puo</h1>
-      <nav aria-label="Navigation principale">
+      <button class="nav-toggle" aria-label="Ouvrir la navigation">
+        <span class="hamburger"></span>
+      </button>
+      <nav class="nav" aria-label="Navigation principale">
         <ul class="nav-list">
           <li><a href="index.html" class="nav-link active" aria-current="page">Accueil</a></li>
           <li><a href="bijoux.html" class="nav-link">Nos Bijoux</a></li>
@@ -31,21 +40,14 @@
   <main>
     <!-- Hero Section -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-content">
+      <div class="hero-content animated">
         <h2 id="hero-title" class="hero-title">L'Art de la Terre Polie</h2>
         <p class="hero-subtitle">Bijoux artisanaux inspirés de la technique dorodango japonaise</p>
-      </div>
-      <div class="hero-image">
-        <img 
-          src="images/dorodango-sphere-hero.jpg" 
-          alt="Sphère dorodango polie brillante, symbole de la technique artisanale japonaise utilisée pour créer nos bijoux"
-          class="sphere-image"
-        >
       </div>
     </section>
 
     <!-- Brand Story Section -->
-    <section class="brand-story" aria-labelledby="brand-story-title">
+    <section class="brand-story animated" aria-labelledby="brand-story-title">
       <div class="section-container">
         <h2 id="brand-story-title" class="section-title">Notre Histoire</h2>
         <div class="story-content">
@@ -65,7 +67,7 @@
     </section>
 
     <!-- Dorodango Technique Section -->
-    <section class="dorodango-technique" aria-labelledby="technique-title">
+    <section class="dorodango-technique animated" aria-labelledby="technique-title">
       <div class="section-container">
         <h2 id="technique-title" class="section-title">La Technique Dorodango</h2>
         <div class="technique-content">
@@ -100,7 +102,7 @@
     </section>
 
     <!-- Philosophy and Commercial Brief Section -->
-    <section class="philosophy" aria-labelledby="philosophy-title">
+    <section class="philosophy animated" aria-labelledby="philosophy-title">
       <div class="section-container">
         <h2 id="philosophy-title" class="section-title">Notre Philosophie</h2>
         <div class="philosophy-content">
@@ -176,5 +178,10 @@
       <p class="copyright">&copy; 2024 Te Puo. Tous droits réservés.</p>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script type="module" src="scripts/animations.js"></script>
+  <script type="module" src="scripts/mobile-nav.js"></script>
 </body>
 </html>

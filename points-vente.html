@@ -8,6 +8,11 @@
   <meta name="author" content="Te Puo">
   <title>Points de Vente - Te Puo</title>
   
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -22,7 +27,10 @@
   <header>
     <div class="header-container">
       <h1 class="logo">Te Puo</h1>
-      <nav aria-label="Navigation principale">
+      <button class="nav-toggle" aria-label="Ouvrir la navigation">
+        <span class="hamburger"></span>
+      </button>
+      <nav class="nav" aria-label="Navigation principale">
         <ul class="nav-list">
           <li><a href="index.html" class="nav-link">Accueil</a></li>
           <li><a href="bijoux.html" class="nav-link">Nos Bijoux</a></li>
@@ -108,5 +116,6 @@
   
   <!-- Scripts -->
   <script type="module" src="scripts/points-vente.js"></script>
+  <script type="module" src="scripts/mobile-nav.js"></script>
 </body>
 </html>

@@ -271,21 +271,8 @@ header {
 
 .sales-points-items {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--spacing-md);
-}
-
-/* Responsive grid */
-@media (min-width: 768px) {
-  .sales-points-items {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .sales-points-items {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 /* Sales Point Item Card */
@@ -462,23 +449,83 @@ footer {
    RESPONSIVE ADJUSTMENTS
    ============================================ */
 
-/* Mobile optimizations */
-@media (max-width: 640px) {
-  .header-container {
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    text-align: center;
+@media (max-width: 767px) {
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1001;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .hamburger {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text-dark);
+    transition: background 0.2s ease-in-out;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-text-dark);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    bottom: -8px;
+  }
+
+  .nav-toggle--open .hamburger {
+    background: transparent;
+  }
+
+  .nav-toggle--open .hamburger::before {
+    transform: rotate(45deg) translate(5px, 6px);
+  }
+
+  .nav-toggle--open .hamburger::after {
+    transform: rotate(-45deg) translate(5px, -6px);
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100%;
+    background: var(--color-bg-secondary);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    padding-top: 5rem;
+  }
+
+  .nav--visible {
+    transform: translateX(0);
   }
 
   .nav-list {
     flex-direction: column;
-    gap: var(--spacing-xs);
-    width: 100%;
+    align-items: center;
+    gap: var(--spacing-md);
   }
 
   .nav-link {
-    display: block;
-    width: 100%;
+    font-size: var(--font-size-lg);
   }
 
   .page-header {
@@ -500,6 +547,9 @@ footer {
 
 /* Tablet optimizations */
 @media (min-width: 641px) and (max-width: 1023px) {
+  .nav-toggle {
+    display: none;
+  }
   .map {
     height: 550px;
   }
