@@ -1,51 +1,92 @@
 /**
  * Te Puo Website - Homepage Styles
- * 
- * Styles specific to the homepage (index.html) featuring:
- * - Hero section with spherical design elements
- * - Text sections with earth tones
- * - Responsive layout for mobile/tablet/desktop
- * - Smooth scroll behavior
- * 
+ *
+ * Organic, tactile design for the homepage.
+ * Hero asymmetric layout, technique overlap, philosophy asymmetric grid.
+ *
  * Requirements: 7.1, 7.2, 7.3, 8.2
  */
 
 /* ============================================
-   HERO SECTION
+   HERO SECTION - Asymmetric layout
    ============================================ */
 
 .hero {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--spacing-xl) var(--spacing-md);
-  min-height: 80vh;
+  padding: var(--spacing-lg) var(--spacing-md);
+  min-height: 85vh;
   background-color: var(--color-bg-secondary);
   overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hero-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  align-items: center;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 800px;
 }
 
 .hero-title {
   font-size: var(--font-size-4xl);
-  color: var(--color-text-dark);
+  color: var(--color-earth-deepest);
   font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
 }
 
 .hero-subtitle {
   font-size: var(--font-size-lg);
   color: var(--color-text-medium);
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-relaxed);
+}
+
+.hero-cta {
   margin-top: var(--spacing-sm);
 }
 
+.hero-image-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .hero-image {
-  display: none; /* Replaced by particle background */
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: var(--radius-organic-1);
+  box-shadow: var(--shadow-xl);
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+
+  .hero-image {
+    max-width: 100%;
+    aspect-ratio: 5 / 6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: var(--spacing-xxl) var(--spacing-xl);
+  }
 }
 
 /* ============================================
@@ -59,24 +100,8 @@
 }
 
 .section-title {
-  text-align: center;
-  color: var(--color-earth-dark);
+  color: var(--color-earth-deepest);
   margin-bottom: var(--spacing-lg);
-  position: relative;
-  padding-bottom: var(--spacing-sm);
-}
-
-/* Decorative underline with spherical accent */
-.section-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 4px;
-  background-color: var(--color-accent);
-  border-radius: var(--border-radius-soft);
 }
 
 /* ============================================
@@ -90,7 +115,6 @@
 
 .story-content {
   max-width: 800px;
-  margin: 0 auto;
 }
 
 .story-text {
@@ -98,7 +122,6 @@
   color: var(--color-text-medium);
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--spacing-md);
-  text-align: justify;
 }
 
 .story-text:last-child {
@@ -106,7 +129,7 @@
 }
 
 /* ============================================
-   DORODANGO TECHNIQUE SECTION
+   DORODANGO TECHNIQUE SECTION - Overlap layout
    ============================================ */
 
 .dorodango-technique {
@@ -118,17 +141,19 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-lg);
-  align-items: center;
+  align-items: start;
+  position: relative;
 }
 
-@media (min-width: 768px) {
-  .technique-content {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.technique-image-wrapper {
+  overflow: hidden;
+  border-radius: var(--radius-organic-2);
+}
 
-  .technique-content:nth-child(even) .technique-text {
-    order: 2;
-  }
+.process-image {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .technique-text {
@@ -140,28 +165,32 @@
   color: var(--color-text-medium);
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--spacing-md);
-  text-align: justify;
 }
 
 .technique-text p:last-child {
   margin-bottom: 0;
 }
 
-.technique-image {
-  flex: 1;
-  min-width: 300px;
-  max-width: 500px;
-}
+@media (min-width: 768px) {
+  .technique-content {
+    grid-template-columns: 1.2fr 1fr;
+  }
 
-.process-image {
-  width: 100%;
-  height: auto;
-  border-radius: var(--border-radius-soft);
-  box-shadow: var(--shadow-lg);
+  /* Text overlaps image slightly on desktop */
+  .technique-text {
+    background-color: var(--color-bg-primary);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-soft);
+    box-shadow: var(--shadow-lg);
+    margin-left: calc(-1 * var(--spacing-lg));
+    margin-top: var(--spacing-lg);
+    position: relative;
+    z-index: 1;
+  }
 }
 
 /* ============================================
-   PHILOSOPHY SECTION
+   PHILOSOPHY SECTION - Asymmetric grid
    ============================================ */
 
 .philosophy {
@@ -169,7 +198,7 @@
   background-color: var(--color-bg-primary);
 }
 
-.philosophy-content {
+.philosophy-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-md);
@@ -181,36 +210,17 @@
   padding: var(--spacing-md);
   border-radius: var(--border-radius-soft);
   box-shadow: var(--shadow-md);
-  transition: all var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
   position: relative;
-  overflow: hidden;
-}
-
-/* Spherical decorative element in card */
-.philosophy-card::before {
-  content: '';
-  position: absolute;
-  top: -30px;
-  right: -30px;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
-  border-radius: var(--border-radius-sphere);
-  opacity: 0.1;
-  transition: opacity var(--transition-base);
 }
 
 .philosophy-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
 }
 
-.philosophy-card:hover::before {
-  opacity: 0.2;
-}
-
 .card-title {
-  color: var(--color-accent);
+  color: var(--color-terracotta);
   font-size: var(--font-size-xl);
   margin-bottom: var(--spacing-sm);
 }
@@ -221,13 +231,28 @@
   margin: 0;
 }
 
+/* Desktop: 1 large card left (spans 2 rows), 2 small right */
+@media (min-width: 768px) {
+  .philosophy-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .philosophy-card--large {
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 .commercial-brief {
   max-width: 800px;
   margin: 0 auto;
   padding: var(--spacing-md);
-  background-color: var(--color-sand);
+  background-color: var(--color-bg-secondary);
   border-radius: var(--border-radius-soft);
-  border-left: 4px solid var(--color-accent);
+  border-left: 4px solid var(--color-terracotta);
 }
 
 .brief-text {
@@ -235,244 +260,10 @@
   color: var(--color-text-medium);
   line-height: var(--line-height-relaxed);
   margin-bottom: var(--spacing-sm);
-  text-align: justify;
 }
 
 .brief-text:last-child {
   margin-bottom: 0;
-}
-
-/* ============================================
-   ANIMATIONS
-   ============================================ */
-
-.animated {
-  opacity: 0;
-}
-
-.fade-in-up {
-  opacity: 1;
-  transform: translateY(0);
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-/* ============================================
-   FOOTER
-   ============================================ */
-
-footer {
-  background-color: var(--color-earth-dark);
-  color: var(--color-text-light);
-  padding: var(--spacing-lg) 0 var(--spacing-md);
-}
-
-.footer-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-md);
-}
-
-.footer-section {
-  margin-bottom: var(--spacing-sm);
-}
-
-.footer-title {
-  color: var(--color-sand);
-  font-size: var(--font-size-lg);
-  margin-bottom: var(--spacing-sm);
-}
-
-.footer-text {
-  color: var(--color-earth-light);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-relaxed);
-  margin: 0;
-}
-
-.footer-links,
-.social-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-links li,
-.social-links li {
-  margin-bottom: var(--spacing-xs);
-}
-
-.footer-link,
-.social-link {
-  color: var(--color-earth-light);
-  font-size: var(--font-size-sm);
-  transition: color var(--transition-fast);
-}
-
-.footer-link:hover,
-.social-link:hover {
-  color: var(--color-sand);
-  text-decoration: none;
-}
-
-.footer-bottom {
-  max-width: 1280px;
-  margin: var(--spacing-md) auto 0;
-  padding: var(--spacing-md) var(--spacing-md) 0;
-  border-top: 1px solid var(--color-earth-medium);
-  text-align: center;
-}
-
-.copyright {
-  color: var(--color-earth-light);
-  font-size: var(--font-size-sm);
-  margin: 0;
-}
-
-/* ============================================
-   RESPONSIVE DESIGN - TABLET
-   ============================================ */
-
-@media (max-width: 767px) {
-  .hero {
-    min-height: 60vh;
-    padding: var(--spacing-lg) var(--spacing-md);
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.1rem;
-  }
-
-  .technique-content,
-  .philosophy-content {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 768px) {
-  /* Hero */
-  .hero {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: var(--spacing-xxl) var(--spacing-lg);
-  }
-
-  .hero-content {
-    text-align: left;
-    max-width: 50%;
-  }
-
-  .hero-title {
-    font-size: var(--font-size-4xl);
-  }
-
-  .hero-subtitle {
-    font-size: var(--font-size-xl);
-  }
-
-  .hero-image {
-    max-width: 45%;
-  }
-
-  /* Technique Section */
-  .technique-content {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
-  /* Philosophy Cards */
-  .philosophy-content {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Footer */
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ============================================
-   RESPONSIVE DESIGN - DESKTOP
-   ============================================ */
-
-@media (min-width: 1024px) {
-  /* Hero */
-  .hero {
-    padding: var(--spacing-xxl) var(--spacing-xl);
-  }
-
-  .hero::before {
-    width: 400px;
-    height: 400px;
-  }
-
-  .hero::after {
-    width: 500px;
-    height: 500px;
-  }
-
-  /* Section Containers */
-  .section-container {
-    padding: 0 var(--spacing-lg);
-  }
-
-  /* Philosophy Cards */
-  .philosophy-content {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-lg);
-  }
-
-  /* Footer */
-  .footer-container {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-lg);
-  }
-}
-
-/* ============================================
-   RESPONSIVE DESIGN - LARGE DESKTOP
-   ============================================ */
-
-@media (min-width: 1280px) {
-  /* Hero */
-  .hero-title {
-    font-size: 4.5rem;
-  }
-
-  .hero-subtitle {
-    font-size: var(--font-size-2xl);
-  }
-}
-
-/* ============================================
-   SMOOTH SCROLL BEHAVIOR
-   ============================================ */
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Smooth scroll for anchor links */
-a[href^="#"] {
-  scroll-behavior: smooth;
 }
 
 /* ============================================
@@ -484,12 +275,6 @@ a[href^="#"] {
     position: static;
   }
 
-  .hero::before,
-  .hero::after,
-  .philosophy-card::before {
-    display: none;
-  }
-
   footer {
     page-break-before: always;
   }
@@ -499,7 +284,6 @@ a[href^="#"] {
    ACCESSIBILITY ENHANCEMENTS
    ============================================ */
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
   .hero {
     background: var(--color-bg-primary);
@@ -508,9 +292,8 @@ a[href^="#"] {
   .philosophy-card {
     border: 2px solid var(--color-text-dark);
   }
-}
 
-/* Dark mode support (optional future enhancement) */
-@media (prefers-color-scheme: dark) {
-  /* Dark mode styles can be added here if needed */
+  .technique-text {
+    border: 2px solid var(--color-text-dark);
+  }
 }

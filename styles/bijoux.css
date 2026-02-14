@@ -1,10 +1,9 @@
 /**
  * Te Puo Website - Bijoux Page Styles
- * 
- * This file contains styles specific to the jewelry page (bijoux.html),
- * including collection sections, jewelry cards, loading states, and error messages.
- * The design incorporates spherical accents inspired by the dorodango technique.
- * 
+ *
+ * Organic layout: varied grid, vertical cards, left-aligned text.
+ * Class names preserved for test compatibility.
+ *
  * Requirements: 4.5, 7.1, 7.2
  */
 
@@ -25,57 +24,22 @@ main {
 .page-header {
   text-align: center;
   margin-bottom: var(--spacing-xl);
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-lg) 0 var(--spacing-md);
 }
 
 .page-title {
   font-size: var(--font-size-4xl);
-  color: var(--color-earth-dark);
+  color: var(--color-earth-deepest);
   margin-bottom: var(--spacing-sm);
-  position: relative;
-  display: inline-block;
-}
-
-/* Spherical accent decoration under title */
-.page-title::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 8px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    var(--color-accent) 20%, 
-    var(--color-accent) 80%, 
-    transparent 100%
-  );
-  border-radius: var(--border-radius-soft);
 }
 
 .page-subtitle {
   font-size: var(--font-size-lg);
   color: var(--color-text-muted);
   max-width: 600px;
-  margin: var(--spacing-md) auto 0;
+  margin: var(--spacing-sm) auto 0;
   line-height: var(--line-height-relaxed);
   text-align: center;
-}
-
-/* Very small devices optimization */
-@media (max-width: 350px) {
-  .page-title {
-    font-size: var(--font-size-2xl);
-  }
-  
-  .collection-title {
-    font-size: var(--font-size-xl);
-  }
-  
-  .collection-section {
-    padding: var(--spacing-sm);
-  }
 }
 
 /* ============================================
@@ -95,7 +59,7 @@ main {
   width: 60px;
   height: 60px;
   border: 6px solid var(--color-sand);
-  border-top-color: var(--color-accent);
+  border-top-color: var(--color-terracotta);
   border-radius: var(--border-radius-sphere);
   animation: spin 1s linear infinite;
   margin-bottom: var(--spacing-md);
@@ -141,11 +105,12 @@ main {
 }
 
 .retry-button {
-  background-color: var(--color-accent);
+  background-color: var(--color-earth-dark);
   color: var(--color-text-light);
   border: none;
   padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-soft);
+  border-radius: var(--border-radius-pill);
+  font-family: 'DM Sans', sans-serif;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
@@ -154,7 +119,7 @@ main {
 }
 
 .retry-button:hover {
-  background-color: var(--color-accent-dark);
+  background-color: var(--color-earth-deepest);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
@@ -173,7 +138,6 @@ main {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
 }
 
@@ -184,9 +148,6 @@ main {
 .empty-state {
   text-align: center;
   padding: var(--spacing-xl) var(--spacing-md);
-  background-color: var(--color-bg-primary);
-  border-radius: var(--border-radius-soft);
-  box-shadow: var(--shadow-md);
   max-width: 600px;
   margin: var(--spacing-xl) auto;
 }
@@ -205,24 +166,16 @@ main {
 }
 
 /* ============================================
-   COLLECTION SECTION
+   COLLECTION SECTION - No card appearance
    ============================================ */
 
 .collection-section {
   margin-bottom: var(--spacing-xl);
-  background-color: var(--color-bg-primary);
-  border-radius: var(--border-radius-soft);
-  padding: var(--spacing-md);
-  box-shadow: var(--shadow-md);
-  transition: box-shadow var(--transition-base);
+  padding: 0 var(--spacing-sm);
   width: 100%;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.collection-section:hover {
-  box-shadow: var(--shadow-lg);
 }
 
 .collection-section:last-child {
@@ -230,75 +183,55 @@ main {
 }
 
 /* ============================================
-   COLLECTION HEADER
+   COLLECTION HEADER - Left-aligned, border bottom
    ============================================ */
 
 .collection-header {
   margin-bottom: var(--spacing-lg);
-  padding-bottom: var(--spacing-md);
-  border-bottom: 2px solid var(--color-sand);
-  position: relative;
-  text-align: center;
-}
-
-/* Spherical accent decoration */
-.collection-header::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -8px;
-  transform: translateX(-50%);
-  width: 16px;
-  height: 16px;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-  border-radius: var(--border-radius-sphere);
-  box-shadow: var(--shadow-sm);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-sand);
 }
 
 .collection-title {
   font-size: var(--font-size-3xl);
-  color: var(--color-earth-dark);
-  margin-bottom: var(--spacing-sm);
+  color: var(--color-earth-deepest);
+  margin-bottom: var(--spacing-xs);
   font-weight: var(--font-weight-bold);
 }
 
 .collection-description {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   color: var(--color-text-muted);
   line-height: var(--line-height-relaxed);
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 700px;
 }
 
 /* ============================================
-   JEWELRY GRID
+   JEWELRY GRID - Varied layout
    ============================================ */
 
 .jewelry-grid {
   display: grid;
   grid-template-columns: 1fr;
-  justify-items: center;
   gap: var(--spacing-md);
   margin-top: var(--spacing-md);
 }
 
-/* Responsive grid adjustments */
 @media (min-width: 480px) {
   .jewelry-grid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  }
-}
-
-@media (min-width: 640px) {
-  .jewelry-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--spacing-lg);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
   .jewelry-grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  /* Every 5th+1 card spans 2 columns to break uniformity */
+  .jewelry-card:nth-child(5n+1) {
+    grid-column: span 2;
   }
 }
 
@@ -311,50 +244,28 @@ main {
   border-radius: var(--border-radius-soft);
   overflow: hidden;
   box-shadow: var(--shadow-md);
-  transition: all var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 450px;
-  margin: 0 auto;
   width: 100%;
 }
 
 .jewelry-card:hover {
-  box-shadow: var(--shadow-xl);
-  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.03) translateY(-2px);
 }
 
 /* ============================================
-   JEWELRY IMAGE CONTAINER
+   JEWELRY IMAGE CONTAINER - 4/5 aspect ratio
    ============================================ */
 
 .jewelry-image-container {
   position: relative;
   width: 100%;
-  padding-top: 100%; /* 1:1 Aspect Ratio */
+  aspect-ratio: 4 / 5;
   background-color: var(--color-sand);
   overflow: hidden;
-}
-
-/* Spherical overlay effect on hover */
-.jewelry-image-container::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(circle, rgba(139, 111, 71, 0.2) 0%, transparent 70%);
-  border-radius: var(--border-radius-sphere);
-  transform: translate(-50%, -50%);
-  transition: all var(--transition-slow);
-  pointer-events: none;
-}
-
-.jewelry-card:hover .jewelry-image-container::after {
-  width: 200%;
-  height: 200%;
 }
 
 .jewelry-image {
@@ -367,23 +278,21 @@ main {
   transition: transform var(--transition-slow);
 }
 
-/* Lazy loading state - subtle blur effect */
 .jewelry-image[loading="lazy"] {
   background-color: var(--color-sand);
 }
 
 .jewelry-card:hover .jewelry-image {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
-/* Image error state styling */
 .jewelry-image[src*="data:image/svg"] {
   object-fit: contain;
   padding: var(--spacing-md);
 }
 
 /* ============================================
-   JEWELRY CONTENT
+   JEWELRY CONTENT - Left-aligned
    ============================================ */
 
 .jewelry-content {
@@ -391,19 +300,18 @@ main {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  text-align: center;
 }
 
 .jewelry-name {
   font-size: var(--font-size-xl);
-  color: var(--color-earth-dark);
+  color: var(--color-earth-deepest);
   font-weight: var(--font-weight-semibold);
   margin-bottom: var(--spacing-xs);
   line-height: var(--line-height-tight);
 }
 
 .jewelry-description {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   line-height: var(--line-height-relaxed);
   margin: 0;
@@ -411,47 +319,18 @@ main {
 }
 
 /* ============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
    ============================================ */
 
-/* Small devices (landscape phones, 640px and up) */
 @media (min-width: 640px) {
-  .page-title {
-    font-size: 3.5rem;
-  }
-  
-  .collection-title {
-    font-size: 2.75rem;
-  }
-  
   main {
-    padding: var(--spacing-xl) var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-md);
   }
 }
 
-/* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .page-header {
     margin-bottom: var(--spacing-xxl);
-  }
-  
-  .collection-section {
-    padding: var(--spacing-xl);
-  }
-}
-
-/* Large devices (desktops, 1024px and up) */
-@media (min-width: 1024px) {
-  .page-title {
-    font-size: 4rem;
-  }
-  
-  .collection-title {
-    font-size: 3rem;
-  }
-  
-  .jewelry-content {
-    padding: var(--spacing-lg);
   }
 }
 
@@ -459,7 +338,6 @@ main {
    ACCESSIBILITY ENHANCEMENTS
    ============================================ */
 
-/* Focus styles for keyboard navigation */
 .nav-link:focus-visible,
 .retry-button:focus-visible {
   outline: 3px solid var(--color-accent);
@@ -471,32 +349,29 @@ main {
   outline-offset: 4px;
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
   .jewelry-card {
     border: 2px solid var(--color-earth-dark);
   }
-  
+
   .collection-header {
     border-bottom-width: 3px;
   }
 }
 
-/* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .jewelry-card,
   .jewelry-image,
   .loading-spinner,
-  .retry-button,
-  .jewelry-image-container::after {
+  .retry-button {
     animation: none;
     transition: none;
   }
-  
+
   .jewelry-card:hover {
     transform: none;
   }
-  
+
   .jewelry-card:hover .jewelry-image {
     transform: none;
   }
@@ -514,17 +389,14 @@ main {
   .retry-button {
     display: none;
   }
-  
+
   .jewelry-card {
     break-inside: avoid;
     box-shadow: none;
     border: 1px solid var(--color-earth-medium);
   }
-  
+
   .collection-section {
     break-inside: avoid;
-    box-shadow: none;
-    border: 1px solid var(--color-earth-medium);
-    margin-bottom: var(--spacing-md);
   }
 }

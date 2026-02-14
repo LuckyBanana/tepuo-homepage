@@ -7,18 +7,17 @@
   <meta name="keywords" content="bijoux artisanaux, dorodango, bijoux faits main, terre polie, artisanat japonais">
   <meta name="author" content="Te Puo">
   <title>Te Puo - Bijoux Artisanaux Dorodango</title>
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
   <!-- Styles -->
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/home.css">
 </head>
 <body>
-  <div id="tsparticles"></div>
   <!-- Header with Navigation -->
   <header>
     <div class="header-container">
@@ -38,103 +37,123 @@
 
   <!-- Main Content -->
   <main>
-    <!-- Hero Section -->
+    <!-- Hero Section - Asymmetric layout -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-content animated">
-        <h2 id="hero-title" class="hero-title">L'Art de la Terre Polie</h2>
-        <p class="hero-subtitle">Bijoux artisanaux inspirés de la technique dorodango japonaise</p>
+      <div class="hero-grid">
+        <div class="hero-content animate-on-scroll">
+          <p class="overline">Artisanat japonais</p>
+          <h2 id="hero-title" class="hero-title">L'Art de la Terre Polie</h2>
+          <p class="hero-subtitle">Bijoux artisanaux inspirés de la technique dorodango japonaise</p>
+          <a href="bijoux.html" class="btn btn-primary hero-cta">Découvrir nos créations</a>
+        </div>
+        <div class="hero-image-wrapper animate-on-scroll" data-animate-delay="200">
+          <img
+            src="https://via.placeholder.com/600x700"
+            alt="Bijou artisanal Te Puo en terre polie, inspiré du dorodango"
+            class="hero-image"
+          >
+        </div>
       </div>
     </section>
 
     <!-- Brand Story Section -->
-    <section class="brand-story animated" aria-labelledby="brand-story-title">
+    <section class="brand-story" aria-labelledby="brand-story-title">
       <div class="section-container">
-        <h2 id="brand-story-title" class="section-title">Notre Histoire</h2>
-        <div class="story-content">
+        <div class="animate-on-scroll">
+          <p class="overline">Notre histoire</p>
+          <h2 id="brand-story-title" class="section-title">L'essence de Te Puo</h2>
+        </div>
+        <div class="story-content animate-on-scroll" data-animate-delay="200">
           <p class="story-text">
-            Te Puo est née d'une fascination pour l'art ancestral japonais du dorodango, 
-            cette technique millénaire qui transforme la terre brute en sphères polies d'une 
-            beauté hypnotique. Chaque bijou Te Puo est une célébration de cette alchimie 
+            Te Puo est née d'une fascination pour l'art ancestral japonais du dorodango,
+            cette technique millénaire qui transforme la terre brute en sphères polies d'une
+            beauté hypnotique. Chaque bijou Te Puo est une célébration de cette alchimie
             entre patience, savoir-faire et respect de la matière.
           </p>
           <p class="story-text">
-            Notre atelier perpétue cet héritage artisanal en créant des pièces uniques où 
-            la terre devient parure. Chaque création porte en elle l'essence de la nature 
+            Notre atelier perpétue cet héritage artisanal en créant des pièces uniques où
+            la terre devient parure. Chaque création porte en elle l'essence de la nature
             et le temps suspendu du geste artisan.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Dorodango Technique Section -->
-    <section class="dorodango-technique animated" aria-labelledby="technique-title">
+    <!-- Dorodango Technique Section - Overlap layout -->
+    <section class="dorodango-technique" aria-labelledby="technique-title">
       <div class="section-container">
-        <h2 id="technique-title" class="section-title">La Technique Dorodango</h2>
+        <div class="animate-on-scroll">
+          <p class="overline">Savoir-faire</p>
+          <h2 id="technique-title" class="section-title">La Technique Dorodango</h2>
+        </div>
         <div class="technique-content">
-          <div class="technique-text">
-            <p>
-              Le dorodango (泥だんご) est un art japonais traditionnel qui consiste à façonner 
-              et polir la terre jusqu'à obtenir une sphère parfaitement lisse et brillante. 
-              Ce processus méditatif, pratiqué depuis des siècles, révèle la beauté cachée 
-              dans la matière la plus humble.
-            </p>
-            <p>
-              La technique repose sur un équilibre délicat entre l'humidité de la terre, 
-              la pression des mains et la patience du polissage. Couche après couche, 
-              grain après grain, la surface se transforme en un miroir naturel qui capture 
-              la lumière d'une manière unique.
-            </p>
-            <p>
-              Chez Te Puo, nous adaptons cette technique ancestrale pour créer des bijoux 
-              qui portent en eux cette même magie : la transformation de la terre en objet 
-              précieux par la seule force du geste artisan.
-            </p>
-          </div>
-          <div class="technique-image">
-            <img 
-              src="https://via.placeholder.com/600x400" 
+          <div class="technique-image-wrapper animate-on-scroll">
+            <img
+              src="https://via.placeholder.com/600x400"
               alt="Processus de création d'une sphère dorodango montrant les différentes étapes de polissage de la terre"
               class="process-image"
             >
+          </div>
+          <div class="technique-text animate-on-scroll" data-animate-delay="200">
+            <p>
+              Le dorodango (泥だんご) est un art japonais traditionnel qui consiste à façonner
+              et polir la terre jusqu'à obtenir une sphère parfaitement lisse et brillante.
+              Ce processus méditatif, pratiqué depuis des siècles, révèle la beauté cachée
+              dans la matière la plus humble.
+            </p>
+            <p>
+              La technique repose sur un équilibre délicat entre l'humidité de la terre,
+              la pression des mains et la patience du polissage. Couche après couche,
+              grain après grain, la surface se transforme en un miroir naturel qui capture
+              la lumière d'une manière unique.
+            </p>
+            <p>
+              Chez Te Puo, nous adaptons cette technique ancestrale pour créer des bijoux
+              qui portent en eux cette même magie : la transformation de la terre en objet
+              précieux par la seule force du geste artisan.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Philosophy and Commercial Brief Section -->
-    <section class="philosophy animated" aria-labelledby="philosophy-title">
+    <!-- Philosophy Section - Asymmetric grid -->
+    <section class="philosophy" aria-labelledby="philosophy-title">
       <div class="section-container">
-        <h2 id="philosophy-title" class="section-title">Notre Philosophie</h2>
-        <div class="philosophy-content">
-          <div class="philosophy-card">
+        <div class="animate-on-scroll">
+          <p class="overline">Nos valeurs</p>
+          <h2 id="philosophy-title" class="section-title">Notre Philosophie</h2>
+        </div>
+        <div class="philosophy-grid">
+          <div class="philosophy-card philosophy-card--large animate-on-scroll">
             <h3 class="card-title">Authenticité</h3>
             <p class="card-text">
-              Chaque bijou Te Puo est façonné à la main, pièce unique portant l'empreinte 
-              de son créateur. Nous refusons la production de masse pour privilégier 
+              Chaque bijou Te Puo est façonné à la main, pièce unique portant l'empreinte
+              de son créateur. Nous refusons la production de masse pour privilégier
               l'excellence artisanale.
             </p>
           </div>
-          <div class="philosophy-card">
+          <div class="philosophy-card animate-on-scroll" data-animate-delay="200">
             <h3 class="card-title">Connexion à la Terre</h3>
             <p class="card-text">
-              Nos créations célèbrent la beauté brute de la matière naturelle. La terre 
+              Nos créations célèbrent la beauté brute de la matière naturelle. La terre
               n'est pas seulement notre matériau, elle est l'âme de chaque bijou.
             </p>
           </div>
-          <div class="philosophy-card">
+          <div class="philosophy-card animate-on-scroll" data-animate-delay="400">
             <h3 class="card-title">Slow Craft</h3>
             <p class="card-text">
-              Dans un monde de vitesse, nous choisissons la lenteur. Chaque pièce demande 
-              des heures de travail patient, un temps nécessaire pour révéler la beauté 
+              Dans un monde de vitesse, nous choisissons la lenteur. Chaque pièce demande
+              des heures de travail patient, un temps nécessaire pour révéler la beauté
               cachée dans la terre.
             </p>
           </div>
         </div>
-        <div class="commercial-brief">
+        <div class="commercial-brief animate-on-scroll">
           <p class="brief-text">
-            Te Puo propose des bijoux artisanaux uniques pour celles et ceux qui cherchent 
-            des pièces authentiques, chargées de sens et d'histoire. Nos créations s'adressent 
-            aux amateurs d'artisanat d'exception, sensibles à la beauté des matières naturelles 
+            Te Puo propose des bijoux artisanaux uniques pour celles et ceux qui cherchent
+            des pièces authentiques, chargées de sens et d'histoire. Nos créations s'adressent
+            aux amateurs d'artisanat d'exception, sensibles à la beauté des matières naturelles
             et au savoir-faire traditionnel.
           </p>
           <p class="brief-text">
@@ -175,12 +194,11 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="copyright">&copy; 2024 Te Puo. Tous droits réservés.</p>
+      <p class="copyright">&copy; 2025 Te Puo. Tous droits réservés.</p>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
   <script type="module" src="scripts/animations.js"></script>
   <script type="module" src="scripts/mobile-nav.js"></script>
 </body>
