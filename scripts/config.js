@@ -11,8 +11,8 @@
 
 export const CONFIG = {
   supabase: {
-    url: import.meta.env.VITE_SUPABASE_URL || 'https://gjsqkascyoqpoxtuyrxu.supabase.co',
-    anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_nd9h1FxUtCFOpnPfrkzZHw_pgTJeZoO'
+    url: import.meta.env?.VITE_SUPABASE_URL || 'https://gjsqkascyoqpoxtuyrxu.supabase.co',
+    anonKey: import.meta.env?.VITE_SUPABASE_ANON_KEY || 'sb_publishable_nd9h1FxUtCFOpnPfrkzZHw_pgTJeZoO'
   },
 
   map: {

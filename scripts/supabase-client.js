@@ -8,10 +8,11 @@
  * Requirements: 3.5, 5.3, 9.3, 8.1 (Performance)
  */
 
-import { CONFIG } from './config.js';
-
 // Request timeout in milliseconds (15 seconds)
 const REQUEST_TIMEOUT = 15000;
+
+// Default cache TTL (5 minutes)
+const DEFAULT_CACHE_TTL = 300000;
 
 /**
  * SupabaseClient class for managing API interactions with Supabase
@@ -33,7 +34,7 @@ export class SupabaseClient {
     this.anonKey = anonKey;
     this.baseUrl = `${supabaseUrl}/rest/v1`;
     this.enableCache = enableCache;
-    this.cacheTTL = CONFIG.cache.ttl;
+    this.cacheTTL = DEFAULT_CACHE_TTL;
     this.cachePrefix = 'tepuo_cache_';
   }
 
