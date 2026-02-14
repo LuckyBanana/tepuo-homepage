@@ -17,152 +17,22 @@ main {
   background-color: var(--color-bg-secondary);
 }
 
-/* ============================================
-   PAGE HEADER
-   ============================================ */
-
-.page-header {
-  text-align: center;
-  margin-bottom: var(--spacing-xl);
-  padding: var(--spacing-lg) 0 var(--spacing-md);
-}
-
-.page-title {
-  font-size: var(--font-size-4xl);
-  color: var(--color-earth-deepest);
-  margin-bottom: var(--spacing-sm);
-}
-
-.page-subtitle {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-muted);
-  max-width: 600px;
-  margin: var(--spacing-sm) auto 0;
-  line-height: var(--line-height-relaxed);
-  text-align: center;
-}
-
-/* ============================================
-   LOADING STATE
-   ============================================ */
-
+/* Page-specific overrides */
 .loading-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-xl) var(--spacing-md);
   min-height: 400px;
 }
 
-.loading-spinner {
-  width: 60px;
-  height: 60px;
-  border: 6px solid var(--color-sand);
-  border-top-color: var(--color-terracotta);
-  border-radius: var(--border-radius-sphere);
-  animation: spin 1s linear infinite;
-  margin-bottom: var(--spacing-md);
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.loading-text {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-muted);
-  font-weight: var(--font-weight-medium);
-}
-
-/* ============================================
-   ERROR CONTAINER
-   ============================================ */
-
-.error-container {
-  max-width: 600px;
-  margin: var(--spacing-xl) auto;
-  padding: var(--spacing-md);
-}
-
-.error-message {
-  background-color: #FEF2F2;
-  border: 2px solid #FCA5A5;
-  border-left: 6px solid #DC2626;
-  border-radius: var(--border-radius-medium);
-  padding: var(--spacing-md);
-  box-shadow: var(--shadow-md);
-}
-
-.error-text {
-  color: #991B1B;
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  margin-bottom: var(--spacing-md);
-  line-height: var(--line-height-relaxed);
-}
-
-.retry-button {
-  background-color: var(--color-earth-dark);
-  color: var(--color-text-light);
-  border: none;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--border-radius-pill);
-  font-family: 'DM Sans', sans-serif;
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: all var(--transition-base);
-  box-shadow: var(--shadow-sm);
-}
-
-.retry-button:hover {
-  background-color: var(--color-earth-deepest);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
-}
-
-.retry-button:active {
-  transform: translateY(0);
-  box-shadow: var(--shadow-sm);
-}
 
 /* ============================================
    COLLECTIONS CONTAINER
    ============================================ */
 
 .collections-container {
-  max-width: 1280px;
+  max-width: var(--max-width-content);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-/* ============================================
-   EMPTY STATE
-   ============================================ */
-
-.empty-state {
-  text-align: center;
-  padding: var(--spacing-xl) var(--spacing-md);
-  max-width: 600px;
-  margin: var(--spacing-xl) auto;
-}
-
-.empty-state-text {
-  font-size: var(--font-size-xl);
-  color: var(--color-text-medium);
-  font-weight: var(--font-weight-semibold);
-  margin-bottom: var(--spacing-sm);
-}
-
-.empty-state-subtext {
-  font-size: var(--font-size-base);
-  color: var(--color-text-muted);
-  line-height: var(--line-height-relaxed);
 }
 
 /* ============================================
@@ -339,7 +209,7 @@ main {
    ============================================ */
 
 .nav-link:focus-visible,
-.retry-button:focus-visible {
+.btn:focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 2px;
 }
@@ -363,7 +233,7 @@ main {
   .jewelry-card,
   .jewelry-image,
   .loading-spinner,
-  .retry-button {
+  .btn {
     animation: none;
     transition: none;
   }
@@ -386,7 +256,7 @@ main {
   footer,
   .loading-state,
   .error-container,
-  .retry-button {
+  .btn {
     display: none;
   }
 

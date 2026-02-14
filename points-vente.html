@@ -22,6 +22,7 @@
   <meta property="og:image" content="https://www.tepuo.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Points de vente des bijoux artisanaux Tē Pūō">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -79,11 +80,13 @@
   </script>
 </head>
 <body>
+  <a class="skip-to-main" href="#main">Aller au contenu principal</a>
+
   <!-- Header with Navigation -->
   <header>
     <div class="header-container">
-      <h1 class="logo">Tē Pūō</h1>
-      <button class="nav-toggle" aria-label="Ouvrir la navigation">
+      <a href="index.html" class="logo">Tē Pūō</a>
+      <button class="nav-toggle" aria-label="Ouvrir la navigation" aria-expanded="false">
         <span class="hamburger"></span>
       </button>
       <nav class="nav" aria-label="Navigation principale">
@@ -97,7 +100,7 @@
   </header>
 
   <!-- Main Content -->
-  <main>
+  <main id="main">
     <div class="page-header">
       <p class="overline">Nos boutiques</p>
       <h1 class="page-title">Où Trouver Nos Bijoux</h1>
@@ -114,13 +117,13 @@
     <div id="error-container" class="error-container" role="alert" aria-live="assertive" style="display: none;">
       <div class="error-message">
         <p class="error-text"></p>
-        <button class="retry-button" onclick="location.reload()">Réessayer</button>
+        <button class="btn btn-primary" data-action="reload">Réessayer</button>
       </div>
     </div>
 
     <!-- Map Container -->
     <div id="map-container" class="map-container">
-      <div id="map" class="map"></div>
+      <div id="map" class="map" role="application" aria-label="Carte interactive des points de vente"></div>
     </div>
 
     <!-- Sales Points List (Optional) -->
@@ -156,13 +159,13 @@
       <div class="footer-section">
         <h3 class="footer-title">Suivez-nous</h3>
         <ul class="social-links">
-          <li><a href="#" class="social-link" aria-label="Instagram">Instagram</a></li>
-          <li><a href="#" class="social-link" aria-label="Facebook">Facebook</a></li>
+          <li><a href="https://instagram.com/tepuo" class="social-link" aria-label="Instagram (nouvelle fenêtre)" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://facebook.com/tepuo" class="social-link" aria-label="Facebook (nouvelle fenêtre)" target="_blank" rel="noopener noreferrer">Facebook</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="copyright">&copy; 2025 Tē Pūō. Tous droits réservés.</p>
+      <p class="copyright">&copy; 2026 Tē Pūō. Tous droits réservés.</p>
     </div>
   </footer>
 

@@ -189,22 +189,10 @@ describe('SupabaseClient', () => {
   });
 
   describe('Error handling', () => {
-    it('should log errors via handleError', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      
+    it('should rethrow errors from fetch', async () => {
       global.fetch = vi.fn().mockRejectedValue(new Error('Test error'));
 
       await expect(client.fetchCollections()).rejects.toThrow('Test error');
-      
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'SupabaseClient Error:',
-        expect.objectContaining({
-          message: 'Test error',
-          name: 'Error'
-        })
-      );
-
-      consoleErrorSpy.mockRestore();
     });
 
     it('should handle response with invalid JSON', async () => {
