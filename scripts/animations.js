@@ -1,5 +1,5 @@
 /**
- * Te Puo Website - Animations
+ * Tē Pūō Website - Animations
  *
  * Scroll-triggered animations using IntersectionObserver.
  * Supports staggered delays via data-animate-delay attribute.

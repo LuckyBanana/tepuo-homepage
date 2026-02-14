@@ -168,7 +168,7 @@ function createJewelryCard(jewelry) {
   const image = document.createElement('img');
   image.className = 'jewelry-image';
   image.src = jewelry.image_url;
-  image.alt = jewelry.name || 'Bijou artisanal Te Puo';
+  image.alt = jewelry.name || 'Bijou artisanal Tē Pūō';
   image.loading = 'lazy'; // Enable lazy loading for performance
   
   // Add error handling for broken images

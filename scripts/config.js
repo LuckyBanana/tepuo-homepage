@@ -1,5 +1,5 @@
 /**
- * Configuration file for Te Puo website
+ * Configuration file for Tē Pūō website
  * 
  * IMPORTANT: Replace the placeholder values with your actual Supabase credentials
  * before deploying to production.
