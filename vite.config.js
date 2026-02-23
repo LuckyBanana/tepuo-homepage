@@ -13,7 +13,8 @@ export default defineConfig({
       input: {
         main: './index.html',
         bijoux: './bijoux.html',
-        pointsVente: './points-vente.html'
+        pointsVente: './points-vente.html',
+        admin: './admin.html'
       }
     },
     // Minify for production using esbuild (standard in Vite)
