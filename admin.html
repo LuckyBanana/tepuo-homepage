@@ -60,6 +60,9 @@
       <button class="admin-tab active" data-tab="collections" aria-selected="true">Collections</button>
       <button class="admin-tab" data-tab="bijoux" aria-selected="false">Bijoux</button>
       <button class="admin-tab" data-tab="points-vente" aria-selected="false">Points de Vente</button>
+      <button class="admin-tab" data-tab="journal" aria-selected="false">Journal</button>
+      <button class="admin-tab" data-tab="contenu" aria-selected="false">Contenu</button>
+      <button class="admin-tab" data-tab="pages" aria-selected="false">Pages</button>
     </nav>
 
     <!-- Main Content -->
@@ -93,6 +96,43 @@
           <button class="btn btn-primary btn-sm" data-action="add" data-entity="sales_point">Ajouter</button>
         </div>
         <div id="sales-points-list" class="entity-list">
+          <div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement...</p></div>
+        </div>
+      </section>
+
+      <!-- Journal Tab -->
+      <section id="tab-journal" class="tab-content" role="tabpanel">
+        <div class="tab-header">
+          <h2 class="tab-title">Journal</h2>
+          <button class="btn btn-primary btn-sm" data-action="add" data-entity="blog_post">Ajouter</button>
+        </div>
+        <div id="blog-posts-list" class="entity-list">
+          <div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement...</p></div>
+        </div>
+      </section>
+
+      <!-- Contenu Tab -->
+      <section id="tab-contenu" class="tab-content" role="tabpanel">
+        <div class="tab-header">
+          <h2 class="tab-title">Contenu des pages</h2>
+        </div>
+        <div class="content-page-selector">
+          <button class="content-page-btn active" data-content-page="home">Accueil</button>
+          <button class="content-page-btn" data-content-page="atelier">L'Atelier</button>
+          <button class="content-page-btn" data-content-page="entretien">Entretien</button>
+        </div>
+        <div id="content-editor" class="content-editor">
+          <div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement...</p></div>
+        </div>
+      </section>
+
+      <!-- Pages Tab -->
+      <section id="tab-pages" class="tab-content" role="tabpanel">
+        <div class="tab-header">
+          <h2 class="tab-title">Pages dynamiques</h2>
+          <button class="btn btn-primary btn-sm" data-action="add" data-entity="page">Ajouter</button>
+        </div>
+        <div id="pages-list" class="entity-list">
           <div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement...</p></div>
         </div>
       </section>

@@ -17,7 +17,8 @@ export default defineConfig({
         blog: './blog.html',
         entretien: './entretien.html',
         pointsVente: './points-vente.html',
-        admin: './admin.html'
+        admin: './admin.html',
+        page: './page.html'
       }
     },
     // Minify for production using esbuild (standard in Vite)

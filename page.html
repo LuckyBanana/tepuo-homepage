@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chargement... — Tē Pūō</title>
+  <meta name="description" content="" id="meta-description">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .dynamic-page { padding: 2rem 0; }
+    .block { max-width: 900px; margin: 0 auto; padding: 2rem var(--spacing-md, 1.5rem); }
+    .block--hero { max-width: 100%; text-align: center; padding: 4rem var(--spacing-md, 1.5rem); background: var(--color-sand, #f5f0eb); }
+    .block--hero .block-title { font-family: var(--font-heading, 'Cormorant Garamond', serif); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 0.5rem; }
+    .block--hero .block-subtitle { font-size: 1.1rem; color: var(--color-earth-dark, #555); max-width: 600px; margin: 0 auto 1.5rem; }
+    .block--hero img { max-width: 100%; height: auto; border-radius: 8px; margin-top: 1.5rem; }
+    .block--text .block-title { font-family: var(--font-heading, 'Cormorant Garamond', serif); font-size: 1.8rem; margin-bottom: 1rem; }
+    .block--text .block-content p { margin-bottom: 1rem; line-height: 1.7; }
+    .block--image-text { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+    .block--image-text.image-right { direction: rtl; }
+    .block--image-text > * { direction: ltr; }
+    .block--image-text img { width: 100%; height: auto; border-radius: 8px; }
+    .block--image-text .block-title { font-family: var(--font-heading, 'Cormorant Garamond', serif); font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .block--image-text .block-content p { margin-bottom: 0.75rem; line-height: 1.7; }
+    .block--gallery .block-title { font-family: var(--font-heading, 'Cormorant Garamond', serif); font-size: 1.8rem; margin-bottom: 1rem; text-align: center; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+    .gallery-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
+    .block--cta { text-align: center; background: var(--color-sand, #f5f0eb); border-radius: 12px; padding: 3rem 2rem; }
+    .block--cta .block-title { font-family: var(--font-heading, 'Cormorant Garamond', serif); font-size: 2rem; margin-bottom: 0.75rem; }
+    .block--cta .block-content { max-width: 600px; margin: 0 auto 1.5rem; }
+    .page-loading, .page-error { text-align: center; padding: 6rem 2rem; font-size: 1.1rem; color: #888; }
+    @media (max-width: 768px) {
+      .block--image-text { grid-template-columns: 1fr; }
+      .block--image-text.image-right { direction: ltr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-to-main" href="#main">Aller au contenu principal</a>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">Tē Pūō</a>
+      <button class="nav-toggle" aria-label="Ouvrir la navigation" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <nav class="nav" aria-label="Navigation principale">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Accueil</a></li>
+          <li><a href="bijoux.html" class="nav-link">Nos Bijoux</a></li>
+          <li><a href="atelier.html" class="nav-link">L'Atelier</a></li>
+          <li><a href="blog.html" class="nav-link">Journal</a></li>
+          <li><a href="points-vente.html" class="nav-link">Points de Vente</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="page-content" class="page-loading">Chargement de la page...</div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 class="footer-title">Tē Pūō</h3>
+        <p class="footer-text">Bijoux artisanaux inspirés de la technique dorodango</p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="index.html" class="footer-link">Accueil</a></li>
+          <li><a href="bijoux.html" class="footer-link">Nos Bijoux</a></li>
+          <li><a href="atelier.html" class="footer-link">L'Atelier</a></li>
+          <li><a href="blog.html" class="footer-link">Journal</a></li>
+          <li><a href="points-vente.html" class="footer-link">Points de Vente</a></li>
+          <li><a href="entretien.html" class="footer-link">Guide d'Entretien</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Contact</h3>
+        <p class="footer-text">
+          <a href="mailto:contact@tepuo.com" class="footer-link">contact@tepuo.com</a>
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Suivez-nous</h3>
+        <ul class="social-links">
+          <li><a href="https://instagram.com/tepuo" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://facebook.com/tepuo" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2026 Tē Pūō. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="scripts/mobile-nav.js"></script>
+  <script type="module" src="scripts/page-renderer.js"></script>
+</body>
+</html>
