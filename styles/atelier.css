@@ -1,0 +1,316 @@
+/**
+ * Tē Pūō Website - Atelier Page Styles
+ *
+ * Organic layout for the workshop/fabrication process page.
+ * Step-by-step process with alternating image/text, material swatches.
+ */
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.atelier-hero {
+  background-color: var(--color-bg-secondary);
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+}
+
+.atelier-hero-title {
+  font-size: var(--font-size-4xl);
+  color: var(--color-earth-deepest);
+  margin-bottom: var(--spacing-sm);
+}
+
+.atelier-hero-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-medium);
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: var(--line-height-relaxed);
+}
+
+/* ============================================
+   INTRODUCTION SECTION
+   ============================================ */
+
+.atelier-intro {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg-primary);
+}
+
+.atelier-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.atelier-intro-text p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-medium);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-md);
+}
+
+.atelier-intro-text p:last-child {
+  margin-bottom: 0;
+}
+
+.organic-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-organic-2);
+  box-shadow: var(--shadow-lg);
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .atelier-intro-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================================
+   SECTION CONTAINERS (shared)
+   ============================================ */
+
+.section-container {
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.section-title {
+  color: var(--color-earth-deepest);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ============================================
+   FABRICATION PROCESS
+   ============================================ */
+
+.process-section {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg-secondary);
+}
+
+.process-intro {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-medium);
+  max-width: 700px;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-xl);
+}
+
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  align-items: center;
+  position: relative;
+}
+
+.step-number {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: clamp(3rem, 2rem + 4vw, 6rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-sand);
+  line-height: 1;
+  position: absolute;
+  top: -0.3em;
+  left: 0;
+  z-index: 0;
+  user-select: none;
+}
+
+.step-content {
+  position: relative;
+  z-index: 1;
+}
+
+.step-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-earth-deepest);
+  margin-bottom: var(--spacing-sm);
+  padding-top: var(--spacing-md);
+}
+
+.step-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-medium);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.step-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-soft);
+  box-shadow: var(--shadow-md);
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .process-step {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .step-number {
+    top: -0.5em;
+  }
+
+  /* Reverse layout for alternating steps */
+  .process-step--reverse .step-content {
+    order: 2;
+  }
+
+  .process-step--reverse .step-image {
+    order: 1;
+  }
+}
+
+/* ============================================
+   MATERIALS SECTION
+   ============================================ */
+
+.materials-section {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-bg-primary);
+}
+
+.materials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+.material-card {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-soft);
+  padding: var(--spacing-md);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.material-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.material-swatch {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--border-radius-sphere);
+  margin: 0 auto var(--spacing-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.material-swatch--ocre {
+  background: radial-gradient(circle at 35% 35%, #D4A54A, #B8860B);
+}
+
+.material-swatch--sienne {
+  background: radial-gradient(circle at 35% 35%, #A0826D, #8B6B54);
+}
+
+.material-swatch--ombre {
+  background: radial-gradient(circle at 35% 35%, #5D4E37, #3A2E1F);
+}
+
+.material-swatch--argile {
+  background: radial-gradient(circle at 35% 35%, #F5F0E8, #DDD5C5);
+}
+
+.material-name {
+  font-size: var(--font-size-xl);
+  color: var(--color-earth-deepest);
+  margin-bottom: var(--spacing-xs);
+}
+
+.material-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .materials-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+
+.atelier-cta {
+  padding: var(--spacing-xl) 0;
+  background-color: var(--color-earth-dark);
+}
+
+.atelier-cta-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.atelier-cta-title {
+  font-size: var(--font-size-3xl);
+  color: var(--color-sand);
+  margin-bottom: var(--spacing-sm);
+}
+
+.atelier-cta-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-earth-light);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-contrast: high) {
+  .material-card {
+    border: 2px solid var(--color-text-dark);
+  }
+
+  .step-image img {
+    border: 2px solid var(--color-text-dark);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .material-card:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   PRINT
+   ============================================ */
+
+@media print {
+  .atelier-hero {
+    min-height: auto;
+    padding: var(--spacing-md) 0;
+  }
+
+  .atelier-cta {
+    display: none;
+  }
+}
