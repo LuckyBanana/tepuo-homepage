@@ -13,6 +13,9 @@ export default defineConfig({
       input: {
         main: './index.html',
         bijoux: './bijoux.html',
+        atelier: './atelier.html',
+        blog: './blog.html',
+        entretien: './entretien.html',
         pointsVente: './points-vente.html',
         admin: './admin.html'
       }
