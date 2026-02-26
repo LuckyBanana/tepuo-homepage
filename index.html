@@ -102,21 +102,23 @@
   </header>
 
   <!-- Main Content -->
-  <main id="main">
+  <main id="main" data-page="home">
     <!-- Hero Section - Asymmetric layout -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-grid">
         <div class="hero-content animate-on-scroll">
-          <p class="overline">Artisanat japonais</p>
-          <h1 id="hero-title" class="hero-title">L'Art de la Terre Polie</h1>
-          <p class="hero-subtitle">Bijoux artisanaux inspirés de la technique dorodango japonaise</p>
-          <a href="bijoux.html" class="btn btn-primary hero-cta">Découvrir nos créations</a>
+          <p class="overline" data-content="hero.overline">Artisanat japonais</p>
+          <h1 id="hero-title" class="hero-title" data-content="hero.title">L'Art de la Terre Polie</h1>
+          <p class="hero-subtitle" data-content="hero.subtitle">Bijoux artisanaux inspirés de la technique dorodango japonaise</p>
+          <a href="bijoux.html" class="btn btn-primary hero-cta" data-content="hero.cta_text" data-content-href="hero.cta_url">Découvrir nos créations</a>
         </div>
         <div class="hero-image-wrapper animate-on-scroll" data-animate-delay="200">
           <img
             src="https://via.placeholder.com/600x700"
             alt="Bijou artisanal Tē Pūō en terre polie, inspiré du dorodango"
             class="hero-image"
+            data-content-src="hero.image_url"
+            data-content-alt="hero.image_alt"
           >
         </div>
       </div>
@@ -126,10 +128,10 @@
     <section class="brand-story" aria-labelledby="brand-story-title">
       <div class="section-container">
         <div class="animate-on-scroll">
-          <p class="overline">Notre histoire</p>
-          <h2 id="brand-story-title" class="section-title">L'essence de Tē Pūō</h2>
+          <p class="overline" data-content="story.overline">Notre histoire</p>
+          <h2 id="brand-story-title" class="section-title" data-content="story.title">L'essence de Tē Pūō</h2>
         </div>
-        <div class="story-content animate-on-scroll" data-animate-delay="200">
+        <div class="story-content animate-on-scroll" data-animate-delay="200" data-content="story.text">
           <p class="story-text">
             Tē Pūō est née d'une fascination pour l'art ancestral japonais du dorodango,
             cette technique millénaire qui transforme la terre brute en sphères polies d'une
@@ -149,8 +151,8 @@
     <section class="dorodango-technique" aria-labelledby="technique-title">
       <div class="section-container">
         <div class="animate-on-scroll">
-          <p class="overline">Savoir-faire</p>
-          <h2 id="technique-title" class="section-title">La Technique Dorodango</h2>
+          <p class="overline" data-content="technique.overline">Savoir-faire</p>
+          <h2 id="technique-title" class="section-title" data-content="technique.title">La Technique Dorodango</h2>
         </div>
         <div class="technique-content">
           <div class="technique-image-wrapper animate-on-scroll">
@@ -158,9 +160,11 @@
               src="https://via.placeholder.com/600x400"
               alt="Processus de création d'une sphère dorodango montrant les différentes étapes de polissage de la terre"
               class="process-image"
+              data-content-src="technique.image_url"
+              data-content-alt="technique.image_alt"
             >
           </div>
-          <div class="technique-text animate-on-scroll" data-animate-delay="200">
+          <div class="technique-text animate-on-scroll" data-animate-delay="200" data-content="technique.text">
             <p>
               Le dorodango (泥だんご) est un art japonais traditionnel qui consiste à façonner
               et polir la terre jusqu'à obtenir une sphère parfaitement lisse et brillante.
@@ -187,35 +191,35 @@
     <section class="philosophy" aria-labelledby="philosophy-title">
       <div class="section-container">
         <div class="animate-on-scroll">
-          <p class="overline">Nos valeurs</p>
-          <h2 id="philosophy-title" class="section-title">Notre Philosophie</h2>
+          <p class="overline" data-content="philosophy.overline">Nos valeurs</p>
+          <h2 id="philosophy-title" class="section-title" data-content="philosophy.title">Notre Philosophie</h2>
         </div>
         <div class="philosophy-grid">
           <div class="philosophy-card philosophy-card--large animate-on-scroll">
-            <h3 class="card-title">Authenticité</h3>
-            <p class="card-text">
+            <h3 class="card-title" data-content="philosophy.card_1_title">Authenticité</h3>
+            <p class="card-text" data-content="philosophy.card_1_text">
               Chaque bijou Tē Pūō est façonné à la main, pièce unique portant l'empreinte
               de son créateur. Nous refusons la production de masse pour privilégier
               l'excellence artisanale.
             </p>
           </div>
           <div class="philosophy-card animate-on-scroll" data-animate-delay="200">
-            <h3 class="card-title">Connexion à la Terre</h3>
-            <p class="card-text">
+            <h3 class="card-title" data-content="philosophy.card_2_title">Connexion à la Terre</h3>
+            <p class="card-text" data-content="philosophy.card_2_text">
               Nos créations célèbrent la beauté brute de la matière naturelle. La terre
               n'est pas seulement notre matériau, elle est l'âme de chaque bijou.
             </p>
           </div>
           <div class="philosophy-card animate-on-scroll" data-animate-delay="400">
-            <h3 class="card-title">Slow Craft</h3>
-            <p class="card-text">
+            <h3 class="card-title" data-content="philosophy.card_3_title">Slow Craft</h3>
+            <p class="card-text" data-content="philosophy.card_3_text">
               Dans un monde de vitesse, nous choisissons la lenteur. Chaque pièce demande
               des heures de travail patient, un temps nécessaire pour révéler la beauté
               cachée dans la terre.
             </p>
           </div>
         </div>
-        <div class="commercial-brief animate-on-scroll">
+        <div class="commercial-brief animate-on-scroll" data-content="philosophy.brief">
           <p class="brief-text">
             Tē Pūō propose des bijoux artisanaux uniques pour celles et ceux qui cherchent
             des pièces authentiques, chargées de sens et d'histoire. Nos créations s'adressent
@@ -270,5 +274,6 @@
   <!-- Scripts -->
   <script type="module" src="scripts/animations.js"></script>
   <script type="module" src="scripts/mobile-nav.js"></script>
+  <script type="module" src="scripts/content-loader.js"></script>
 </body>
 </html>

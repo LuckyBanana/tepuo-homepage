@@ -607,3 +607,115 @@
   margin-right: 0.4rem;
   accent-color: var(--color-primary, #8B7355);
 }
+
+/* Content page selector */
+.content-page-selector {
+  display: flex;
+  gap: var(--spacing-xs);
+  padding: 0 var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.content-page-btn {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--color-sand);
+  border-radius: 6px;
+  background: white;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.content-page-btn.active {
+  background: var(--color-earth-dark, #4A3C2E);
+  color: white;
+  border-color: var(--color-earth-dark, #4A3C2E);
+}
+
+/* Content editor */
+.content-editor {
+  padding: 0 var(--spacing-md) var(--spacing-md);
+}
+
+.content-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.content-section {
+  border: 1px solid var(--color-sand);
+  border-radius: 8px;
+  padding: var(--spacing-md);
+  background: white;
+}
+
+.content-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-earth-dark, #4A3C2E);
+  padding: 0 0.5rem;
+}
+
+.content-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--spacing-sm);
+}
+
+/* Block editor */
+.blocks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: var(--spacing-sm) 0;
+}
+
+.block-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-sand);
+  border-radius: 6px;
+  background: white;
+}
+
+.block-item-type {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-earth-dark, #4A3C2E);
+  background: var(--color-sand, #f5f0eb);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.block-item-title {
+  flex: 1;
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.block-item-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.btn-icon--sm {
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 0.7rem;
+}
+
+.block-add-row {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+  margin-top: var(--spacing-sm);
+}

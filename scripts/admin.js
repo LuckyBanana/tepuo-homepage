@@ -157,7 +157,28 @@ let collectionsCache = [];
 let jewelryCache = [];
 let salesPointsCache = [];
 let blogPostsCache = [];
+let pagesCache = [];
+let currentContentPage = 'home';
 let pendingDeleteAction = null;
+
+const PAGE_LABELS = { home: 'Accueil', atelier: 'L\'Atelier', entretien: 'Entretien' };
+const SECTION_LABELS = {
+  hero: 'Hero', story: 'Notre histoire', technique: 'Technique dorodango',
+  philosophy: 'Philosophie', intro: 'Introduction', process: 'Processus',
+  step_1: 'Étape 1', step_2: 'Étape 2', step_3: 'Étape 3', step_4: 'Étape 4', step_5: 'Étape 5',
+  materials: 'Matériaux', material_1: 'Matériau 1', material_2: 'Matériau 2',
+  material_3: 'Matériau 3', material_4: 'Matériau 4', cta: 'Appel à l\'action',
+  tips: 'Conseils', tip_1: 'Conseil 1', tip_2: 'Conseil 2', tip_3: 'Conseil 3', tip_4: 'Conseil 4',
+  dos_donts: 'Bonnes pratiques', dos: 'À faire', donts: 'À éviter', restoration: 'Restauration',
+};
+
+const BLOCK_TYPES = {
+  hero: 'Hero',
+  text: 'Texte',
+  image_text: 'Image + Texte',
+  gallery: 'Galerie',
+  cta: 'Appel à l\'action',
+};
 
 // ============================================================================
 // UI - SCREENS
@@ -757,15 +778,433 @@ async function deleteBlogPost(id) {
 }
 
 // ============================================================================
+// CONTENT EDITOR (site_content)
+// ============================================================================
+
+async function loadContent(page) {
+  currentContentPage = page;
+  const container = document.getElementById('content-editor');
+  container.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement...</p></div>';
+
+  // Update page selector buttons
+  document.querySelectorAll('.content-page-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.contentPage === page);
+  });
+
+  try {
+    const rows = await apiFetch(`/site_content?page=eq.${page}&select=*&order=sort_order`);
+    renderContentEditor(rows);
+  } catch (err) {
+    container.innerHTML = `<div class="admin-empty-state"><p>Erreur de chargement</p><span>${err.message}</span></div>`;
+  }
+}
+
+function renderContentEditor(rows) {
+  const container = document.getElementById('content-editor');
+  if (!rows.length) {
+    container.innerHTML = '<div class="admin-empty-state"><p>Aucun contenu éditable</p><span>Exécutez la migration 11_create_cms_tables.sql</span></div>';
+    return;
+  }
+
+  // Group by section
+  const sections = new Map();
+  for (const row of rows) {
+    if (!sections.has(row.section)) sections.set(row.section, []);
+    sections.get(row.section).push(row);
+  }
+
+  let html = '<form id="content-form" class="content-form">';
+  for (const [section, fields] of sections) {
+    const sectionLabel = SECTION_LABELS[section] || section;
+    html += `<fieldset class="content-section"><legend class="content-section-title">${escapeHtml(sectionLabel)}</legend>`;
+    for (const field of fields) {
+      const inputId = `content-${field.id}`;
+      html += `<div class="form-group">`;
+      html += `<label for="${inputId}" class="form-label">${escapeHtml(field.label)}</label>`;
+      if (field.content_type === 'textarea') {
+        html += `<textarea id="${inputId}" class="form-textarea" rows="4" data-content-id="${field.id}">${escapeHtml(field.value || '')}</textarea>`;
+      } else if (field.content_type === 'list') {
+        html += `<textarea id="${inputId}" class="form-textarea" rows="4" data-content-id="${field.id}" data-content-type="list">${escapeHtml(formatListForEdit(field.value))}</textarea>`;
+        html += `<p class="form-hint">Un élément par ligne</p>`;
+      } else if (field.content_type === 'image') {
+        html += `<input type="text" id="${inputId}" class="form-input" data-content-id="${field.id}" value="${escapeAttr(field.value || '')}" placeholder="https://...">`;
+      } else {
+        html += `<input type="text" id="${inputId}" class="form-input" data-content-id="${field.id}" value="${escapeAttr(field.value || '')}">`;
+      }
+      html += `</div>`;
+    }
+    html += `</fieldset>`;
+  }
+  html += `<div class="content-form-actions"><button type="submit" class="btn btn-primary">Sauvegarder les modifications</button></div>`;
+  html += '</form>';
+  container.innerHTML = html;
+
+  document.getElementById('content-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await saveContent();
+  });
+}
+
+function formatListForEdit(jsonStr) {
+  try {
+    const items = JSON.parse(jsonStr);
+    return Array.isArray(items) ? items.join('\n') : jsonStr;
+  } catch { return jsonStr || ''; }
+}
+
+function formatListForSave(text) {
+  const items = text.split('\n').map(l => l.trim()).filter(Boolean);
+  return JSON.stringify(items);
+}
+
+async function saveContent() {
+  const fields = document.querySelectorAll('[data-content-id]');
+  const btn = document.querySelector('.content-form-actions .btn');
+  btn.disabled = true;
+  btn.textContent = 'Enregistrement...';
+
+  try {
+    for (const field of fields) {
+      const id = field.dataset.contentId;
+      let value = field.value;
+      if (field.dataset.contentType === 'list') {
+        value = formatListForSave(value);
+      }
+      await apiFetch(`/site_content?id=eq.${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ value, updated_at: new Date().toISOString() }),
+      });
+    }
+    showToast('Contenu sauvegardé');
+  } catch (err) {
+    showToast(err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Sauvegarder les modifications';
+  }
+}
+
+// ============================================================================
+// PAGES - CRUD UI
+// ============================================================================
+
+async function loadPages() {
+  const container = document.getElementById('pages-list');
+  container.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement...</p></div>';
+
+  try {
+    pagesCache = await apiFetch('/pages?select=*&order=created_at.desc');
+    renderPages();
+  } catch (err) {
+    container.innerHTML = `<div class="admin-empty-state"><p>Erreur de chargement</p><span>${err.message}</span></div>`;
+  }
+}
+
+function renderPages() {
+  const container = document.getElementById('pages-list');
+
+  if (pagesCache.length === 0) {
+    container.innerHTML = '<div class="admin-empty-state"><p>Aucune page</p><span>Créez votre première page dynamique</span></div>';
+    return;
+  }
+
+  container.innerHTML = pagesCache.map(p => `
+    <div class="entity-card" data-id="${p.id}">
+      <div class="entity-card-body">
+        <p class="entity-card-name">${escapeHtml(p.title)} <span class="entity-card-badge">${p.is_published ? 'Publié' : 'Brouillon'}</span></p>
+        <p class="entity-card-detail">/${escapeHtml(p.slug)}</p>
+      </div>
+      <div class="entity-card-actions">
+        <button class="btn btn-secondary btn-sm" data-action="edit-blocks" data-entity="page" data-id="${p.id}">Blocs</button>
+        <button class="btn-icon" data-action="edit" data-entity="page" data-id="${p.id}" aria-label="Modifier">${ICON_EDIT}</button>
+        <button class="btn-icon btn-icon--danger" data-action="delete" data-entity="page" data-id="${p.id}" aria-label="Supprimer">${ICON_DELETE}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openPageForm(page = null) {
+  const isEdit = !!page;
+  const title = isEdit ? 'Modifier la page' : 'Nouvelle page';
+
+  const html = `
+    <div class="form-group">
+      <label for="field-title" class="form-label">Titre *</label>
+      <input type="text" id="field-title" class="form-input" value="${escapeAttr(page?.title || '')}" required>
+    </div>
+    <div class="form-group">
+      <label for="field-slug" class="form-label">Slug (URL) *</label>
+      <input type="text" id="field-slug" class="form-input" value="${escapeAttr(page?.slug || '')}" required placeholder="ma-page">
+      <p class="form-hint">Accessible via /page.html?slug=ma-page</p>
+    </div>
+    <div class="form-group">
+      <label for="field-meta" class="form-label">Meta description</label>
+      <textarea id="field-meta" class="form-textarea" rows="2">${escapeHtml(page?.meta_description || '')}</textarea>
+    </div>
+    <div class="form-group form-group--checkbox">
+      <label class="form-label">
+        <input type="checkbox" id="field-published" ${page?.is_published ? 'checked' : ''}>
+        Publier
+      </label>
+    </div>
+  `;
+
+  openModal(title, html, async () => {
+    const pageTitle = document.getElementById('field-title').value.trim();
+    const slug = document.getElementById('field-slug').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-');
+    const metaDescription = document.getElementById('field-meta').value.trim();
+    const isPublished = document.getElementById('field-published').checked;
+
+    if (!pageTitle) throw new Error('Le titre est requis');
+    if (!slug) throw new Error('Le slug est requis');
+
+    const data = {
+      title: pageTitle,
+      slug,
+      meta_description: metaDescription || null,
+      is_published: isPublished,
+      updated_at: new Date().toISOString(),
+    };
+
+    if (isEdit) {
+      await apiUpdate('pages', page.id, data);
+      showToast('Page modifiée');
+    } else {
+      await apiInsert('pages', data);
+      showToast('Page créée');
+    }
+
+    await loadPages();
+  });
+}
+
+async function deletePage(id) {
+  const item = pagesCache.find(p => p.id === id);
+  openConfirmDelete(`Supprimer la page « ${item?.title || ''} » et tous ses blocs ?`, async () => {
+    try {
+      await apiDelete('pages', id);
+      showToast('Page supprimée');
+      await loadPages();
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  });
+}
+
+// ============================================================================
+// BLOCK EDITOR
+// ============================================================================
+
+async function openBlockEditor(pageId) {
+  const page = pagesCache.find(p => p.id === pageId);
+  if (!page) return;
+
+  try {
+    const blocks = await apiFetch(`/page_blocks?page_id=eq.${pageId}&select=*&order=sort_order`);
+    renderBlockEditorModal(page, blocks);
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+function renderBlockEditorModal(page, blocks) {
+  let blocksHtml = blocks.map((b, i) => {
+    const typeLabel = BLOCK_TYPES[b.block_type] || b.block_type;
+    const blockTitle = b.data?.title || b.data?.text?.substring(0, 40) || '(sans titre)';
+    return `
+      <div class="block-item" data-block-id="${b.id}">
+        <span class="block-item-type">${escapeHtml(typeLabel)}</span>
+        <span class="block-item-title">${escapeHtml(blockTitle)}</span>
+        <div class="block-item-actions">
+          ${i > 0 ? `<button type="button" class="btn-icon btn-icon--sm" data-block-action="up" data-block-id="${b.id}">&#9650;</button>` : ''}
+          ${i < blocks.length - 1 ? `<button type="button" class="btn-icon btn-icon--sm" data-block-action="down" data-block-id="${b.id}">&#9660;</button>` : ''}
+          <button type="button" class="btn-icon btn-icon--sm" data-block-action="edit" data-block-id="${b.id}">${ICON_EDIT}</button>
+          <button type="button" class="btn-icon btn-icon--sm btn-icon--danger" data-block-action="delete" data-block-id="${b.id}">${ICON_DELETE}</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  if (!blocks.length) {
+    blocksHtml = '<p class="form-hint" style="text-align:center;padding:1rem;">Aucun bloc. Ajoutez-en un ci-dessous.</p>';
+  }
+
+  const blockTypeOptions = Object.entries(BLOCK_TYPES).map(
+    ([val, label]) => `<option value="${val}">${label}</option>`
+  ).join('');
+
+  const html = `
+    <p class="form-hint">Page : <strong>${escapeHtml(page.title)}</strong> (/${escapeHtml(page.slug)})</p>
+    <div class="blocks-list">${blocksHtml}</div>
+    <div class="block-add-row">
+      <select id="new-block-type" class="form-select">${blockTypeOptions}</select>
+      <button type="button" id="add-block-btn" class="btn btn-secondary btn-sm">Ajouter un bloc</button>
+    </div>
+  `;
+
+  openModal(`Blocs — ${page.title}`, html, async () => { closeModal(); });
+
+  // Hide submit button, use custom interactions
+  document.getElementById('modal-submit').style.display = 'none';
+  document.getElementById('modal-cancel').textContent = 'Fermer';
+
+  // Block actions
+  const modalBody = document.getElementById('modal-body');
+  modalBody.addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-block-action]');
+    if (!btn) return;
+    const action = btn.dataset.blockAction;
+    const blockId = btn.dataset.blockId;
+
+    if (action === 'delete') {
+      await apiFetch(`/page_blocks?id=eq.${blockId}`, { method: 'DELETE' });
+      showToast('Bloc supprimé');
+      closeModal();
+      openBlockEditor(page.id);
+    } else if (action === 'up' || action === 'down') {
+      await moveBlock(page.id, blocks, blockId, action === 'up' ? -1 : 1);
+      closeModal();
+      openBlockEditor(page.id);
+    } else if (action === 'edit') {
+      closeModal();
+      const block = blocks.find(b => b.id === blockId);
+      if (block) openBlockForm(page.id, block);
+    }
+  });
+
+  // Add block
+  document.getElementById('add-block-btn').addEventListener('click', () => {
+    const type = document.getElementById('new-block-type').value;
+    closeModal();
+    openBlockForm(page.id, { block_type: type, data: {}, sort_order: blocks.length });
+  });
+}
+
+async function moveBlock(pageId, blocks, blockId, direction) {
+  const idx = blocks.findIndex(b => b.id === blockId);
+  const swapIdx = idx + direction;
+  if (swapIdx < 0 || swapIdx >= blocks.length) return;
+
+  await apiFetch(`/page_blocks?id=eq.${blocks[idx].id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ sort_order: blocks[swapIdx].sort_order }),
+  });
+  await apiFetch(`/page_blocks?id=eq.${blocks[swapIdx].id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ sort_order: blocks[idx].sort_order }),
+  });
+}
+
+function openBlockForm(pageId, block) {
+  const isEdit = !!block.id;
+  const title = isEdit ? 'Modifier le bloc' : 'Nouveau bloc';
+  const d = block.data || {};
+
+  let fieldsHtml = '';
+  switch (block.block_type) {
+    case 'hero':
+      fieldsHtml = `
+        ${fieldInput('Titre', 'block-title', d.title)}
+        ${fieldInput('Sous-titre', 'block-subtitle', d.subtitle)}
+        ${fieldInput('Image URL', 'block-image', d.image_url)}
+        ${fieldInput('Alt image', 'block-image-alt', d.image_alt)}
+        ${fieldInput('Texte du bouton', 'block-cta-text', d.cta_text)}
+        ${fieldInput('Lien du bouton', 'block-cta-url', d.cta_url)}`;
+      break;
+    case 'text':
+      fieldsHtml = `
+        ${fieldInput('Titre', 'block-title', d.title)}
+        ${fieldTextarea('Contenu', 'block-content', d.content)}`;
+      break;
+    case 'image_text':
+      fieldsHtml = `
+        ${fieldInput('Titre', 'block-title', d.title)}
+        ${fieldTextarea('Contenu', 'block-content', d.content)}
+        ${fieldInput('Image URL', 'block-image', d.image_url)}
+        ${fieldInput('Alt image', 'block-image-alt', d.image_alt)}
+        <div class="form-group">
+          <label class="form-label">Position de l'image</label>
+          <select id="block-image-pos" class="form-select">
+            <option value="left" ${d.image_position !== 'right' ? 'selected' : ''}>Gauche</option>
+            <option value="right" ${d.image_position === 'right' ? 'selected' : ''}>Droite</option>
+          </select>
+        </div>`;
+      break;
+    case 'gallery':
+      fieldsHtml = `
+        ${fieldInput('Titre', 'block-title', d.title)}
+        ${fieldTextarea('Images (une URL par ligne)', 'block-images', (d.images || []).map(i => i.url || i).join('\n'))}`;
+      break;
+    case 'cta':
+      fieldsHtml = `
+        ${fieldInput('Titre', 'block-title', d.title)}
+        ${fieldTextarea('Texte', 'block-content', d.text)}
+        ${fieldInput('Texte du bouton', 'block-cta-text', d.button_text)}
+        ${fieldInput('Lien du bouton', 'block-cta-url', d.button_url)}`;
+      break;
+  }
+
+  const html = `<p class="form-hint">Type : <strong>${BLOCK_TYPES[block.block_type]}</strong></p>${fieldsHtml}`;
+
+  openModal(title, html, async () => {
+    const data = buildBlockData(block.block_type);
+
+    if (isEdit) {
+      await apiFetch(`/page_blocks?id=eq.${block.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ data }),
+      });
+      showToast('Bloc modifié');
+    } else {
+      await apiFetch('/page_blocks', {
+        method: 'POST',
+        headers: { 'Prefer': 'return=representation' },
+        body: JSON.stringify({ page_id: pageId, block_type: block.block_type, data, sort_order: block.sort_order }),
+      });
+      showToast('Bloc ajouté');
+    }
+
+    closeModal();
+    openBlockEditor(pageId);
+  });
+}
+
+function fieldInput(label, id, value) {
+  return `<div class="form-group"><label for="${id}" class="form-label">${label}</label><input type="text" id="${id}" class="form-input" value="${escapeAttr(value || '')}"></div>`;
+}
+
+function fieldTextarea(label, id, value) {
+  return `<div class="form-group"><label for="${id}" class="form-label">${label}</label><textarea id="${id}" class="form-textarea" rows="4">${escapeHtml(value || '')}</textarea></div>`;
+}
+
+function buildBlockData(type) {
+  const val = (id) => document.getElementById(id)?.value?.trim() || '';
+  switch (type) {
+    case 'hero':
+      return { title: val('block-title'), subtitle: val('block-subtitle'), image_url: val('block-image'), image_alt: val('block-image-alt'), cta_text: val('block-cta-text'), cta_url: val('block-cta-url') };
+    case 'text':
+      return { title: val('block-title'), content: val('block-content') };
+    case 'image_text':
+      return { title: val('block-title'), content: val('block-content'), image_url: val('block-image'), image_alt: val('block-image-alt'), image_position: val('block-image-pos') || 'left' };
+    case 'gallery':
+      return { title: val('block-title'), images: val('block-images').split('\n').filter(Boolean).map(url => ({ url: url.trim(), alt: '' })) };
+    case 'cta':
+      return { title: val('block-title'), text: val('block-content'), button_text: val('block-cta-text'), button_url: val('block-cta-url') };
+    default:
+      return {};
+  }
+}
+
+// ============================================================================
 // DATA LOADING
 // ============================================================================
 
 async function loadAllData() {
   await loadCollections();
-  // Load jewelry after collections so we can show collection names
   await loadJewelry();
   await loadSalesPoints();
   await loadBlogPosts();
+  loadContent('home');
+  loadPages();
 }
 
 // ============================================================================
@@ -860,7 +1299,13 @@ function initEventListeners() {
       else if (entity === 'jewelry') openJewelryForm();
       else if (entity === 'sales_point') openSalesPointForm();
       else if (entity === 'blog_post') openBlogPostForm();
+      else if (entity === 'page') openPageForm();
     });
+  });
+
+  // Content page selector
+  document.querySelectorAll('.content-page-btn').forEach(btn => {
+    btn.addEventListener('click', () => loadContent(btn.dataset.contentPage));
   });
 
   // Event delegation for edit/delete buttons in entity lists
@@ -883,12 +1328,18 @@ function initEventListeners() {
       } else if (entity === 'blog_post') {
         const item = blogPostsCache.find(p => p.id === id);
         if (item) openBlogPostForm(item);
+      } else if (entity === 'page') {
+        const item = pagesCache.find(p => p.id === id);
+        if (item) openPageForm(item);
       }
+    } else if (action === 'edit-blocks') {
+      if (entity === 'page') openBlockEditor(id);
     } else if (action === 'delete') {
       if (entity === 'collection') deleteCollection(id);
       else if (entity === 'jewelry') deleteJewelry(id);
       else if (entity === 'sales_point') deleteSalesPoint(id);
       else if (entity === 'blog_post') deleteBlogPost(id);
+      else if (entity === 'page') deletePage(id);
     }
   });
 }

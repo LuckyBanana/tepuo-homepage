@@ -97,13 +97,13 @@
   </header>
 
   <!-- Main Content -->
-  <main id="main">
+  <main id="main" data-page="atelier">
     <!-- Hero Section -->
     <section class="atelier-hero" aria-labelledby="atelier-title">
       <div class="atelier-hero-content animate-on-scroll">
-        <p class="overline">Notre savoir-faire</p>
-        <h1 id="atelier-title" class="atelier-hero-title">L'Atelier</h1>
-        <p class="atelier-hero-subtitle">Là où la terre devient bijou, guidée par la patience et le geste ancestral du dorodango</p>
+        <p class="overline" data-content="hero.overline">Notre savoir-faire</p>
+        <h1 id="atelier-title" class="atelier-hero-title" data-content="hero.title">L'Atelier</h1>
+        <p class="atelier-hero-subtitle" data-content="hero.subtitle">Là où la terre devient bijou, guidée par la patience et le geste ancestral du dorodango</p>
       </div>
     </section>
 
@@ -111,8 +111,8 @@
     <section class="atelier-intro" aria-labelledby="intro-title">
       <div class="section-container">
         <div class="atelier-intro-grid">
-          <div class="atelier-intro-text animate-on-scroll">
-            <h2 id="intro-title" class="section-title">Un lieu de création</h2>
+          <div class="atelier-intro-text animate-on-scroll" data-content="intro.text">
+            <h2 id="intro-title" class="section-title" data-content="intro.title">Un lieu de création</h2>
             <p>
               L'atelier Tē Pūō est un espace où le temps s'arrête. Ici, chaque bijou naît
               d'un dialogue intime entre l'artisan et la matière. La terre, récoltée avec soin,
@@ -130,6 +130,8 @@
               src="https://via.placeholder.com/600x500"
               alt="Vue de l'atelier Tē Pūō avec les outils de fabrication et les terres naturelles"
               class="organic-image"
+              data-content-src="intro.image_url"
+              data-content-alt="intro.image_alt"
             >
           </div>
         </div>
@@ -140,9 +142,9 @@
     <section class="process-section" aria-labelledby="process-title">
       <div class="section-container">
         <div class="animate-on-scroll">
-          <p class="overline">Le processus</p>
-          <h2 id="process-title" class="section-title">De la Terre au Bijou</h2>
-          <p class="process-intro">Chaque bijou Tē Pūō traverse un processus de création en plusieurs étapes,
+          <p class="overline" data-content="process.overline">Le processus</p>
+          <h2 id="process-title" class="section-title" data-content="process.title">De la Terre au Bijou</h2>
+          <p class="process-intro" data-content="process.intro">Chaque bijou Tē Pūō traverse un processus de création en plusieurs étapes,
             où patience et précision se conjuguent pour révéler la beauté cachée de la terre.</p>
         </div>
 
@@ -151,8 +153,8 @@
           <div class="process-step animate-on-scroll">
             <div class="step-number" aria-hidden="true">01</div>
             <div class="step-content">
-              <h3 class="step-title">La Sélection de la Terre</h3>
-              <p class="step-text">
+              <h3 class="step-title" data-content="step_1.title">La Sélection de la Terre</h3>
+              <p class="step-text" data-content="step_1.text">
                 Tout commence par le choix de la terre. Nous sélectionnons des argiles naturelles
                 aux textures et pigments variés — ocre, sienne, terre d'ombre. Chaque terre apporte
                 sa couleur unique et ses propriétés de polissage distinctes.
@@ -163,6 +165,8 @@
                 src="https://via.placeholder.com/500x350"
                 alt="Différentes terres et argiles naturelles utilisées pour la création des bijoux"
                 loading="lazy"
+                data-content-src="step_1.image_url"
+                data-content-alt="step_1.image_alt"
               >
             </div>
           </div>
@@ -171,8 +175,8 @@
           <div class="process-step process-step--reverse animate-on-scroll" data-animate-delay="100">
             <div class="step-number" aria-hidden="true">02</div>
             <div class="step-content">
-              <h3 class="step-title">Le Façonnage</h3>
-              <p class="step-text">
+              <h3 class="step-title" data-content="step_2.title">Le Façonnage</h3>
+              <p class="step-text" data-content="step_2.text">
                 La terre est hydratée puis façonnée à la main. Ce geste fondamental du dorodango
                 demande une maîtrise parfaite de l'humidité et de la pression. La forme émerge
                 progressivement, couche après couche, dans un rythme méditatif.
@@ -183,6 +187,8 @@
                 src="https://via.placeholder.com/500x350"
                 alt="Mains de l'artisan façonnant la terre pour créer la forme du bijou"
                 loading="lazy"
+                data-content-src="step_2.image_url"
+                data-content-alt="step_2.image_alt"
               >
             </div>
           </div>
@@ -191,8 +197,8 @@
           <div class="process-step animate-on-scroll" data-animate-delay="200">
             <div class="step-number" aria-hidden="true">03</div>
             <div class="step-content">
-              <h3 class="step-title">Le Séchage Contrôlé</h3>
-              <p class="step-text">
+              <h3 class="step-title" data-content="step_3.title">Le Séchage Contrôlé</h3>
+              <p class="step-text" data-content="step_3.text">
                 La pièce est ensuite séchée dans des conditions soigneusement contrôlées.
                 Cette étape critique détermine la solidité finale du bijou. Le séchage se fait
                 progressivement, parfois sur plusieurs jours, pour éviter les fissures.
@@ -203,6 +209,8 @@
                 src="https://via.placeholder.com/500x350"
                 alt="Bijoux en terre en cours de séchage contrôlé dans l'atelier"
                 loading="lazy"
+                data-content-src="step_3.image_url"
+                data-content-alt="step_3.image_alt"
               >
             </div>
           </div>
@@ -211,8 +219,8 @@
           <div class="process-step process-step--reverse animate-on-scroll" data-animate-delay="300">
             <div class="step-number" aria-hidden="true">04</div>
             <div class="step-content">
-              <h3 class="step-title">Le Polissage</h3>
-              <p class="step-text">
+              <h3 class="step-title" data-content="step_4.title">Le Polissage</h3>
+              <p class="step-text" data-content="step_4.text">
                 C'est l'étape magique. Par des frottements répétés et délicats, la surface
                 de la terre se transforme. Les particules fines remontent en surface et créent
                 un lustre naturel hypnotique. Ce polissage peut prendre des heures de travail patient.
@@ -223,6 +231,8 @@
                 src="https://via.placeholder.com/500x350"
                 alt="Polissage minutieux de la surface du bijou en terre pour obtenir un lustre naturel"
                 loading="lazy"
+                data-content-src="step_4.image_url"
+                data-content-alt="step_4.image_alt"
               >
             </div>
           </div>
@@ -231,8 +241,8 @@
           <div class="process-step animate-on-scroll" data-animate-delay="400">
             <div class="step-number" aria-hidden="true">05</div>
             <div class="step-content">
-              <h3 class="step-title">La Finition</h3>
-              <p class="step-text">
+              <h3 class="step-title" data-content="step_5.title">La Finition</h3>
+              <p class="step-text" data-content="step_5.text">
                 Une fois le polissage achevé, chaque bijou reçoit un traitement protecteur
                 qui préserve son éclat tout en respectant la matière naturelle. Les apprêts
                 sont ajoutés avec soin pour transformer la sphère polie en bijou portable.
@@ -243,6 +253,8 @@
                 src="https://via.placeholder.com/500x350"
                 alt="Bijou en terre polie terminé avec ses finitions et apprêts"
                 loading="lazy"
+                data-content-src="step_5.image_url"
+                data-content-alt="step_5.image_alt"
               >
             </div>
           </div>
@@ -254,29 +266,29 @@
     <section class="materials-section" aria-labelledby="materials-title">
       <div class="section-container">
         <div class="animate-on-scroll">
-          <p class="overline">Nos matériaux</p>
-          <h2 id="materials-title" class="section-title">La Terre, Notre Matière Première</h2>
+          <p class="overline" data-content="materials.overline">Nos matériaux</p>
+          <h2 id="materials-title" class="section-title" data-content="materials.title">La Terre, Notre Matière Première</h2>
         </div>
         <div class="materials-grid">
           <div class="material-card animate-on-scroll">
             <div class="material-swatch material-swatch--ocre"></div>
-            <h3 class="material-name">Terre d'Ocre</h3>
-            <p class="material-desc">Teintes chaudes allant du jaune doré au rouge profond. Riche en oxydes de fer.</p>
+            <h3 class="material-name" data-content="material_1.name">Terre d'Ocre</h3>
+            <p class="material-desc" data-content="material_1.desc">Teintes chaudes allant du jaune doré au rouge profond. Riche en oxydes de fer.</p>
           </div>
           <div class="material-card animate-on-scroll" data-animate-delay="100">
             <div class="material-swatch material-swatch--sienne"></div>
-            <h3 class="material-name">Terre de Sienne</h3>
-            <p class="material-desc">Nuances brunes et ambrées rappelant les paysages toscans. Texture fine et soyeuse.</p>
+            <h3 class="material-name" data-content="material_2.name">Terre de Sienne</h3>
+            <p class="material-desc" data-content="material_2.desc">Nuances brunes et ambrées rappelant les paysages toscans. Texture fine et soyeuse.</p>
           </div>
           <div class="material-card animate-on-scroll" data-animate-delay="200">
             <div class="material-swatch material-swatch--ombre"></div>
-            <h3 class="material-name">Terre d'Ombre</h3>
-            <p class="material-desc">Tons profonds et terreux, du brun chocolat au noir chaud. Polissage exceptionnel.</p>
+            <h3 class="material-name" data-content="material_3.name">Terre d'Ombre</h3>
+            <p class="material-desc" data-content="material_3.desc">Tons profonds et terreux, du brun chocolat au noir chaud. Polissage exceptionnel.</p>
           </div>
           <div class="material-card animate-on-scroll" data-animate-delay="300">
             <div class="material-swatch material-swatch--argile"></div>
-            <h3 class="material-name">Argile Blanche</h3>
-            <p class="material-desc">Pureté et luminosité. Crée des pièces d'une clarté presque lunaire après polissage.</p>
+            <h3 class="material-name" data-content="material_4.name">Argile Blanche</h3>
+            <p class="material-desc" data-content="material_4.desc">Pureté et luminosité. Crée des pièces d'une clarté presque lunaire après polissage.</p>
           </div>
         </div>
       </div>
@@ -286,12 +298,12 @@
     <section class="atelier-cta" aria-labelledby="cta-title">
       <div class="section-container">
         <div class="atelier-cta-content animate-on-scroll">
-          <h2 id="cta-title" class="atelier-cta-title">Découvrez nos créations</h2>
-          <p class="atelier-cta-text">
+          <h2 id="cta-title" class="atelier-cta-title" data-content="cta.title">Découvrez nos créations</h2>
+          <p class="atelier-cta-text" data-content="cta.text">
             Chaque bijou Tē Pūō porte en lui des heures de travail patient et la beauté
             brute de la terre transformée. Explorez nos collections pour trouver votre pièce unique.
           </p>
-          <a href="bijoux.html" class="btn btn-primary">Voir nos collections</a>
+          <a href="bijoux.html" class="btn btn-primary" data-content="cta.button_text" data-content-href="cta.button_url">Voir nos collections</a>
         </div>
       </div>
     </section>
@@ -337,5 +349,6 @@
   <!-- Scripts -->
   <script type="module" src="scripts/animations.js"></script>
   <script type="module" src="scripts/mobile-nav.js"></script>
+  <script type="module" src="scripts/content-loader.js"></script>
 </body>
 </html>
