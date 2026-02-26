@@ -104,127 +104,9 @@
       <p class="page-subtitle">Plongez dans l'univers Tē Pūō : techniques ancestrales, inspirations créatives et coulisses de l'atelier</p>
     </div>
 
-    <!-- Blog Articles -->
-    <div class="blog-container">
-      <!-- Featured Article -->
-      <article class="blog-card blog-card--featured animate-on-scroll">
-        <div class="blog-card-image">
-          <img
-            src="https://via.placeholder.com/800x450"
-            alt="Sphère dorodango parfaitement polie reflétant la lumière"
-            loading="lazy"
-          >
-        </div>
-        <div class="blog-card-content">
-          <div class="blog-card-meta">
-            <span class="blog-card-category">Savoir-faire</span>
-            <time class="blog-card-date" datetime="2026-02-15">15 février 2026</time>
-          </div>
-          <h2 class="blog-card-title">Le Dorodango : quand la terre devient miroir</h2>
-          <p class="blog-card-excerpt">
-            Le dorodango, littéralement « boulette de boue », est un art japonais qui fascine par sa
-            simplicité apparente et sa profondeur philosophique. Découvrez comment cette technique
-            millénaire transforme la terre la plus humble en objet d'une beauté saisissante, et comment
-            elle inspire chacune de nos créations.
-          </p>
-          <span class="blog-card-readmore">Lire l'article</span>
-        </div>
-      </article>
-
-      <!-- Articles Grid -->
-      <div class="blog-grid">
-        <article class="blog-card animate-on-scroll">
-          <div class="blog-card-image">
-            <img
-              src="https://via.placeholder.com/600x400"
-              alt="Différentes argiles naturelles aux couleurs terre"
-              loading="lazy"
-            >
-          </div>
-          <div class="blog-card-content">
-            <div class="blog-card-meta">
-              <span class="blog-card-category">Matériaux</span>
-              <time class="blog-card-date" datetime="2026-01-28">28 janvier 2026</time>
-            </div>
-            <h2 class="blog-card-title">Les terres que nous utilisons</h2>
-            <p class="blog-card-excerpt">
-              De l'ocre du Roussillon à l'argile blanche du Berry, chaque terre raconte une histoire
-              géologique millénaire. Nous sélectionnons nos matières premières pour leurs qualités
-              esthétiques et leur aptitude au polissage.
-            </p>
-            <span class="blog-card-readmore">Lire l'article</span>
-          </div>
-        </article>
-
-        <article class="blog-card animate-on-scroll" data-animate-delay="100">
-          <div class="blog-card-image">
-            <img
-              src="https://via.placeholder.com/600x400"
-              alt="Mains d'artisan travaillant la terre avec précision"
-              loading="lazy"
-            >
-          </div>
-          <div class="blog-card-content">
-            <div class="blog-card-meta">
-              <span class="blog-card-category">Coulisses</span>
-              <time class="blog-card-date" datetime="2026-01-10">10 janvier 2026</time>
-            </div>
-            <h2 class="blog-card-title">Une journée à l'atelier</h2>
-            <p class="blog-card-excerpt">
-              À quoi ressemble une journée type dans l'atelier Tē Pūō ? Entre préparation des terres,
-              façonnage patient et séances de polissage hypnotiques, suivez-nous dans les coulisses
-              de la création artisanale.
-            </p>
-            <span class="blog-card-readmore">Lire l'article</span>
-          </div>
-        </article>
-
-        <article class="blog-card animate-on-scroll" data-animate-delay="200">
-          <div class="blog-card-image">
-            <img
-              src="https://via.placeholder.com/600x400"
-              alt="Jardin zen japonais avec pierres et sable ratissé"
-              loading="lazy"
-            >
-          </div>
-          <div class="blog-card-content">
-            <div class="blog-card-meta">
-              <span class="blog-card-category">Inspiration</span>
-              <time class="blog-card-date" datetime="2025-12-18">18 décembre 2025</time>
-            </div>
-            <h2 class="blog-card-title">Wabi-sabi : la beauté de l'imperfection</h2>
-            <p class="blog-card-excerpt">
-              Le wabi-sabi, cette philosophie esthétique japonaise qui célèbre l'imperfection et
-              l'éphémère, est au coeur de notre démarche créative. Chaque bijou Tē Pūō porte
-              les marques uniques de la main qui l'a façonné.
-            </p>
-            <span class="blog-card-readmore">Lire l'article</span>
-          </div>
-        </article>
-
-        <article class="blog-card animate-on-scroll" data-animate-delay="300">
-          <div class="blog-card-image">
-            <img
-              src="https://via.placeholder.com/600x400"
-              alt="Bijou Tē Pūō porté, pendentif en terre polie sur chaîne dorée"
-              loading="lazy"
-            >
-          </div>
-          <div class="blog-card-content">
-            <div class="blog-card-meta">
-              <span class="blog-card-category">Conseils</span>
-              <time class="blog-card-date" datetime="2025-12-02">2 décembre 2025</time>
-            </div>
-            <h2 class="blog-card-title">Comment porter un bijou en terre</h2>
-            <p class="blog-card-excerpt">
-              Un bijou en terre polie est une pièce singulière qui se marie avec de nombreux styles.
-              Découvrez nos conseils pour sublimer vos tenues avec nos créations artisanales,
-              du quotidien aux occasions spéciales.
-            </p>
-            <span class="blog-card-readmore">Lire l'article</span>
-          </div>
-        </article>
-      </div>
+    <!-- Blog Articles (loaded dynamically from Supabase) -->
+    <div class="blog-container" id="blog-container">
+      <div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement des articles...</p></div>
     </div>
   </main>
 
@@ -268,5 +150,6 @@
   <!-- Scripts -->
   <script type="module" src="scripts/animations.js"></script>
   <script type="module" src="scripts/mobile-nav.js"></script>
+  <script type="module" src="scripts/blog.js"></script>
 </body>
 </html>

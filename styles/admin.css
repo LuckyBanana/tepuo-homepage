@@ -585,3 +585,25 @@
     padding: var(--spacing-sm);
   }
 }
+
+/* Blog post card meta date */
+.entity-card-meta {
+  display: inline-block;
+  margin-left: var(--spacing-xs);
+  font-size: 0.8rem;
+  color: var(--color-text-light, #888);
+}
+
+/* Checkbox form group */
+.form-group--checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.form-group--checkbox input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-right: 0.4rem;
+  accent-color: var(--color-primary, #8B7355);
+}

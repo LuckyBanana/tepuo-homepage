@@ -156,6 +156,7 @@ async function uploadImage(file) {
 let collectionsCache = [];
 let jewelryCache = [];
 let salesPointsCache = [];
+let blogPostsCache = [];
 let pendingDeleteAction = null;
 
 // ============================================================================
@@ -606,6 +607,156 @@ async function deleteSalesPoint(id) {
 }
 
 // ============================================================================
+// BLOG POSTS - CRUD UI
+// ============================================================================
+
+async function loadBlogPosts() {
+  const container = document.getElementById('blog-posts-list');
+  container.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement...</p></div>';
+
+  try {
+    blogPostsCache = await apiList('blog_posts');
+    renderBlogPosts();
+  } catch (err) {
+    container.innerHTML = `<div class="admin-empty-state"><p>Erreur de chargement</p><span>${err.message}</span></div>`;
+  }
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  return new Date(dateStr).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function renderBlogPosts() {
+  const container = document.getElementById('blog-posts-list');
+
+  if (blogPostsCache.length === 0) {
+    container.innerHTML = '<div class="admin-empty-state"><p>Aucun article</p><span>Ajoutez votre premier article</span></div>';
+    return;
+  }
+
+  container.innerHTML = blogPostsCache.map(p => `
+    <div class="entity-card" data-id="${p.id}">
+      ${p.image_url ? `<img class="entity-card-image" src="${escapeAttr(p.image_url)}" alt="${escapeAttr(p.image_alt || p.title)}">` : ''}
+      <div class="entity-card-body">
+        <p class="entity-card-name">${escapeHtml(p.title)}${p.is_featured ? ' <span class="entity-card-badge">Mis en avant</span>' : ''}</p>
+        <p class="entity-card-detail">${escapeHtml(p.excerpt || 'Aucun extrait')}</p>
+        <span class="entity-card-badge">${escapeHtml(p.category || '—')}</span>
+        <span class="entity-card-meta">${formatDate(p.published_at)}</span>
+      </div>
+      <div class="entity-card-actions">
+        <button class="btn-icon" data-action="edit" data-entity="blog_post" data-id="${p.id}" aria-label="Modifier ${escapeHtml(p.title)}">${ICON_EDIT}</button>
+        <button class="btn-icon btn-icon--danger" data-action="delete" data-entity="blog_post" data-id="${p.id}" aria-label="Supprimer ${escapeHtml(p.title)}">${ICON_DELETE}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openBlogPostForm(post = null) {
+  const isEdit = !!post;
+  const title = isEdit ? 'Modifier l\'article' : 'Nouvel article';
+
+  const publishedValue = post?.published_at ? new Date(post.published_at).toISOString().slice(0, 16) : '';
+
+  const html = `
+    <div class="form-group">
+      <label for="field-title" class="form-label">Titre *</label>
+      <input type="text" id="field-title" class="form-input" value="${escapeAttr(post?.title || '')}" required>
+    </div>
+    <div class="form-group">
+      <label for="field-category" class="form-label">Catégorie</label>
+      <input type="text" id="field-category" class="form-input" value="${escapeAttr(post?.category || '')}" placeholder="Savoir-faire, Matériaux, Coulisses, Inspiration, Conseils">
+    </div>
+    <div class="form-group">
+      <label for="field-excerpt" class="form-label">Extrait</label>
+      <textarea id="field-excerpt" class="form-textarea" rows="3">${escapeHtml(post?.excerpt || '')}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="field-content" class="form-label">Contenu</label>
+      <textarea id="field-content" class="form-textarea" rows="8">${escapeHtml(post?.content || '')}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="field-image" class="form-label">Image de couverture</label>
+      <input type="file" id="field-image" class="form-file-input" accept="image/jpeg,image/png,image/webp">
+      <p class="form-hint">JPG, PNG ou WebP (max 5 Mo)</p>
+      ${post?.image_url ? `<img class="image-preview" src="${escapeAttr(post.image_url)}" alt="Aperçu">` : ''}
+    </div>
+    <div class="form-group">
+      <label for="field-image-url" class="form-label">ou URL de l'image</label>
+      <input type="url" id="field-image-url" class="form-input" value="${escapeAttr(post?.image_url || '')}" placeholder="https://...">
+    </div>
+    <div class="form-group">
+      <label for="field-image-alt" class="form-label">Texte alternatif de l'image</label>
+      <input type="text" id="field-image-alt" class="form-input" value="${escapeAttr(post?.image_alt || '')}" placeholder="Description de l'image">
+    </div>
+    <div class="form-group">
+      <label for="field-published-at" class="form-label">Date de publication</label>
+      <input type="datetime-local" id="field-published-at" class="form-input" value="${publishedValue}">
+    </div>
+    <div class="form-group form-group--checkbox">
+      <label class="form-label">
+        <input type="checkbox" id="field-featured" ${post?.is_featured ? 'checked' : ''}>
+        Mettre en avant
+      </label>
+    </div>
+  `;
+
+  openModal(title, html, async () => {
+    const postTitle = document.getElementById('field-title').value.trim();
+    const category = document.getElementById('field-category').value.trim();
+    const excerpt = document.getElementById('field-excerpt').value.trim();
+    const content = document.getElementById('field-content').value.trim();
+    const imageAlt = document.getElementById('field-image-alt').value.trim();
+    const publishedAt = document.getElementById('field-published-at').value || null;
+    const isFeatured = document.getElementById('field-featured').checked;
+    const fileInput = document.getElementById('field-image');
+    let imageUrl = document.getElementById('field-image-url').value.trim();
+
+    if (!postTitle) throw new Error('Le titre est requis');
+
+    if (fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      if (file.size > 5 * 1024 * 1024) throw new Error('L\'image ne doit pas dépasser 5 Mo');
+      imageUrl = await uploadImage(file);
+    }
+
+    const data = {
+      title: postTitle,
+      category: category || null,
+      excerpt: excerpt || null,
+      content: content || null,
+      image_alt: imageAlt || null,
+      is_featured: isFeatured,
+      published_at: publishedAt ? new Date(publishedAt).toISOString() : new Date().toISOString(),
+    };
+    if (imageUrl) data.image_url = imageUrl;
+
+    if (isEdit) {
+      await apiUpdate('blog_posts', post.id, data);
+      showToast('Article modifié');
+    } else {
+      await apiInsert('blog_posts', data);
+      showToast('Article ajouté');
+    }
+
+    await loadBlogPosts();
+  });
+}
+
+async function deleteBlogPost(id) {
+  const item = blogPostsCache.find(p => p.id === id);
+  openConfirmDelete(`Supprimer l'article « ${item?.title || ''} » ?`, async () => {
+    try {
+      await apiDelete('blog_posts', id);
+      showToast('Article supprimé');
+      await loadBlogPosts();
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  });
+}
+
+// ============================================================================
 // DATA LOADING
 // ============================================================================
 
@@ -614,6 +765,7 @@ async function loadAllData() {
   // Load jewelry after collections so we can show collection names
   await loadJewelry();
   await loadSalesPoints();
+  await loadBlogPosts();
 }
 
 // ============================================================================
@@ -707,6 +859,7 @@ function initEventListeners() {
       if (entity === 'collection') openCollectionForm();
       else if (entity === 'jewelry') openJewelryForm();
       else if (entity === 'sales_point') openSalesPointForm();
+      else if (entity === 'blog_post') openBlogPostForm();
     });
   });
 
@@ -727,11 +880,15 @@ function initEventListeners() {
       } else if (entity === 'sales_point') {
         const item = salesPointsCache.find(sp => sp.id === id);
         if (item) openSalesPointForm(item);
+      } else if (entity === 'blog_post') {
+        const item = blogPostsCache.find(p => p.id === id);
+        if (item) openBlogPostForm(item);
       }
     } else if (action === 'delete') {
       if (entity === 'collection') deleteCollection(id);
       else if (entity === 'jewelry') deleteJewelry(id);
       else if (entity === 'sales_point') deleteSalesPoint(id);
+      else if (entity === 'blog_post') deleteBlogPost(id);
     }
   });
 }

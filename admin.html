@@ -60,6 +60,7 @@
       <button class="admin-tab active" data-tab="collections" aria-selected="true">Collections</button>
       <button class="admin-tab" data-tab="bijoux" aria-selected="false">Bijoux</button>
       <button class="admin-tab" data-tab="points-vente" aria-selected="false">Points de Vente</button>
+      <button class="admin-tab" data-tab="journal" aria-selected="false">Journal</button>
     </nav>
 
     <!-- Main Content -->
@@ -93,6 +94,17 @@
           <button class="btn btn-primary btn-sm" data-action="add" data-entity="sales_point">Ajouter</button>
         </div>
         <div id="sales-points-list" class="entity-list">
+          <div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement...</p></div>
+        </div>
+      </section>
+
+      <!-- Journal Tab -->
+      <section id="tab-journal" class="tab-content" role="tabpanel">
+        <div class="tab-header">
+          <h2 class="tab-title">Journal</h2>
+          <button class="btn btn-primary btn-sm" data-action="add" data-entity="blog_post">Ajouter</button>
+        </div>
+        <div id="blog-posts-list" class="entity-list">
           <div class="loading-state"><div class="loading-spinner"></div><p class="loading-text">Chargement...</p></div>
         </div>
       </section>
